@@ -3,10 +3,10 @@ const url_cameras = 'http://localhost:3000/api/cameras';
 const url_furniture = 'http://localhost:3000/api/furniture';
 
 const url_product_id = new URLSearchParams(window.location.search);
-console.log(url_product_id);
+// console.log(url_product_id);
 
 const _id = url_product_id.get("id")
-console.log(_id);
+// console.log(_id);
 
 
 function insertCard (product_selected_by_id) {
@@ -25,16 +25,16 @@ function insertCard (product_selected_by_id) {
   
 }
 
-// product search on http://localhost:3000/api/teddies
+// product search with fetch promise on http://localhost:3000/api/teddies
 fetch(url_teddies)
   .then((resp) => resp.json())
   .then(function(data) {   
 
     const product_selected_by_id = data.find((teddy) => teddy._id === _id);
 
-    console.log(product_selected_by_id);
+    // console.log(product_selected_by_id);
 
-    insertCard (product_selected_by_id);
+    insertCard(product_selected_by_id);
        
   })
   .catch(function(error) {
@@ -42,7 +42,7 @@ fetch(url_teddies)
   });
 
 
-// product search on http://localhost:3000/api/cameras
+// product search with fetch promise on http://localhost:3000/api/cameras
 fetch(url_cameras)
 
 .then((resp) => resp.json())
@@ -51,9 +51,9 @@ fetch(url_cameras)
 
   const product_selected_by_id = data.find((camera) => camera._id === _id);
 
-  console.log(product_selected_by_id);
+  // console.log(product_selected_by_id);
 
-  insertCard (product_selected_by_id);
+  insertCard(product_selected_by_id);
          
   })
 
@@ -62,7 +62,7 @@ fetch(url_cameras)
   });
 
 
-// product search on http://localhost:3000/api/furniture
+// product search with fetch promise on http://localhost:3000/api/furniture
 fetch(url_furniture)
 
   .then((resp) => resp.json())
@@ -71,9 +71,9 @@ fetch(url_furniture)
 
     const product_selected_by_id = data.find((furniture) => furniture._id === _id);
 
-    console.log(product_selected_by_id);
+    // console.log(product_selected_by_id);
 
-    insertCard (product_selected_by_id);    
+    insertCard(product_selected_by_id);    
        
   })
 
