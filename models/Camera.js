@@ -8,7 +8,7 @@ const cameras = [
     "name": "Zurss 50S",
     "price": 49900,
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "imageUrl": "http://localhost:3000/images/vcam_1.jpg"
+    "imageUrl": "vcam_1.jpg"
   },
   {
     "lenses": [
@@ -20,7 +20,7 @@ const cameras = [
     "name": "Hirsch 400DTS",
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "price": 309900,
-    "imageUrl": "http://localhost:3000/images/vcam_2.jpg"
+    "imageUrl": "vcam_2.jpg"
   },
   {
     "lenses": [
@@ -30,7 +30,7 @@ const cameras = [
     "name": "Franck JS 105",
     "price": 209900,
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "imageUrl": "http://localhost:3000/images/vcam_3.jpg"
+    "imageUrl": "vcam_3.jpg"
   },
   {
     "lenses": [
@@ -41,7 +41,7 @@ const cameras = [
     "name": "Kuros TTS",
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "price": 159900,
-    "imageUrl": "http://localhost:3000/images/vcam_4.jpg"
+    "imageUrl": "vcam_4.jpg"
   },
   {
     "lenses": [
@@ -53,45 +53,18 @@ const cameras = [
     "name": "Katatone",
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "price": 59900,
-    "imageUrl": "http://localhost:3000/images/vcam_5.jpg"
+    "imageUrl": "vcam_5.jpg"
   }
 ];
 
+exports.find = () => {
+  return new Promise((resolve, reject) => resolve(JSON.parse(JSON.stringify(cameras))));
+}
 
-const queryString_url_id = window.location.search;
-console.log(queryString_url_id);
-
-const urlSearchParams = new URLSearchParams(queryString_url_id);
-console.log(urlSearchParams);
-
-const _id = urlSearchParams.get("id");
-console.log(_id);
-
-console.log(cameras);
-const product_selected_by_id = cameras.find((camera) => camera._id === _id);
-
-console.log(product_selected_by_id);
-
-const positionCard = document.querySelector(".card");
-
-const structureCard = `
-  <img src="${product_selected_by_id.imageUrl}" class="d-block w-100" alt="Caméra vintage n°1" />
-  <div class="card-body">
-    <h5 class="card-title">Caméra vintage n°1</h5>
-    <p class="card-text">Caméra vintage n°1</p>
-  </div>
-`;
-
-positionCard.innerHTML = structureCard;
-
-// exports.find = () => {
-//   return new Promise((resolve, reject) => resolve(JSON.parse(JSON.stringify(cameras))));
-// }
-
-// exports.findById = (id) => {
-//   return new Promise((resolve, reject) =>
-//     resolve(JSON.parse(JSON.stringify(cameras)).find(camera =>
-//       camera._id == id)
-//     )
-//   );
-// }
+exports.findById = (id) => {
+  return new Promise((resolve, reject) =>
+    resolve(JSON.parse(JSON.stringify(cameras)).find(camera =>
+      camera._id == id)
+    )
+  );
+}
