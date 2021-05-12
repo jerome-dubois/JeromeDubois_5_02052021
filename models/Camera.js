@@ -57,6 +57,8 @@ const cameras = [
   }
 ];
 
+
+
 exports.find = () => {
   return new Promise((resolve, reject) => resolve(JSON.parse(JSON.stringify(cameras))));
 }

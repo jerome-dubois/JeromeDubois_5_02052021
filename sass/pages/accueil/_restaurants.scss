@@ -1,0 +1,108 @@
+// .restaurants {
+//     background-color: #F2F2F2;
+//     padding: 1.5rem;
+//     &__list {
+//         display: flex;
+//         flex-wrap: wrap;
+//         justify-content: space-between;                       
+//     }
+// }
+
+// .restaurant-card {
+//     display: flex;
+//     flex-direction: column;
+//     background-color: white;
+//     border-radius: 20px;
+//     color: black;
+//     margin: 15px 0px;
+//     text-decoration: none;
+//     box-shadow: -2px 2px 8px #c5c5c5;
+//     min-width: 250px;
+//     position: relative;
+
+//     &__img {
+//         height: 200px;
+//         object-fit: cover;
+//         border-radius: 20px 20px 0px 0px;
+//     }
+
+//     &__description {
+//         display: flex;
+//         align-items: center;
+//         position: relative;
+//         margin: 10px;
+//     }
+//     &__heading {
+//         flex:1;
+//     }
+
+//     &__label {
+//         background-color: $color-tertiary;
+//         color: #227762;
+//         position: absolute;
+//         top: 1rem;
+//         right: 1rem;
+//         border-radius: 0.1rem;
+//         padding: 0.5rem;
+//     }
+
+//     &__heart-icon {
+//         margin-right: 10px;
+//         width:2em;
+//         height:2em;      
+//         position: relative;
+//         background-color: black;
+//         &::before {
+//             opacity: 0;
+//             transition: 0.5s;
+//             content: "";
+//             background: linear-gradient($color-primary,$color-secondary);
+//             position: absolute;
+//             width: 100%;
+//             height: 100%;
+//             top: 0;
+//             left: 0;
+//         }
+//         &:active::before {
+//             opacity: 1;           
+//         }
+//         &:active {
+//             .far {
+//                 opacity: 0;
+//             }
+//         }
+
+//         @media (min-width: 1024px) {
+//             &:hover::before {
+//                 opacity: 1;           
+//             }
+//             &:hover {
+//                 .far {
+//                     opacity: 0;
+//                 }
+//             }       
+//         }
+//     }
+//     &__heart-layer {
+//         background-color: white!important;
+//         mix-blend-mode: lighten;
+//         position: absolute;
+//         top: 0;
+//         left: 0;
+//         height: 100%;
+//         width: 100%;
+//     }   
+
+//     & h2, p {
+//         margin:0.1rem;
+//     }
+    
+//     @media (max-width: 599px) {
+//         width: 100%;        
+//     }
+
+//     @media (min-width: 600px) {
+//         width: 48%;
+//     }  
+
+// }
