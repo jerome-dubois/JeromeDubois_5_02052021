@@ -2,31 +2,7 @@ const url_product_id = new URLSearchParams(window.location.search);
 
 const _id = url_product_id.get("id");
 
-// const options = [colors, lenses, varnish];
-
-// function insertSelectedCard (product_selected_by_id, option_name) {
-
-//   const structureCard = `
-//     <img src="${product_selected_by_id.imageUrl}" class="d-block w-100" alt="${product_selected_by_id.name}" />
-//     <div class="card-body">
-//       <h5 class="card-title">Product Name : <span>${product_selected_by_id.name}</span></h5>
-//       <p class="card-text">Price : <span>${product_selected_by_id.price}</span></p>
-//       <p class="card-text">Description : <span>${product_selected_by_id.description}</span></p>
-//       <label for="option-select">Choose a option:</label>
-//         <select class="form-select" aria-label="Product options select">
-//           <option selected>Open this select menu</option>
-//           <option value="1">${product_selected_by_id.option_name[0]}</option>
-//           <option value="2">${product_selected_by_id.option_name[1]}</option>
-//           <option value="3">${product_selected_by_id.option_name[2]}</option>
-//         </select>>
-//     </div>
-//   `;
-
-//   document.querySelector(".card").innerHTML = structureCard;
-  
-// }
-
-function insertSelectedTeddyCard (product_selected_by_id) {
+function insertSelectedCard (product_selected_by_id) {
 
   const structureCard = `
     <img src="${product_selected_by_id.imageUrl}" class="d-block w-100" alt="${product_selected_by_id.name}" />
@@ -34,61 +10,58 @@ function insertSelectedTeddyCard (product_selected_by_id) {
       <h5 class="card-title">Product Name : <span>${product_selected_by_id.name}</span></h5>
       <p class="card-text">Price : <span>${product_selected_by_id.price}</span></p>
       <p class="card-text">Description : <span>${product_selected_by_id.description}</span></p>
-      <label for="option-select">Choose a option:</label>
-        <select class="form-select" aria-label="Product options select">
-          <option selected>Open this select menu</option>
-          <option value="1">${product_selected_by_id.colors[0]}</option>
-          <option value="2">${product_selected_by_id.colors[1]}</option>
-          <option value="3">${product_selected_by_id.colors[2]}</option>
-        </select>>
+      <form>
+        <label for="product-option">Choose a option:</label>
+            <select class="form-select" name="product-option" id="product-option" aria-label="Furniture options selected">
+              <option selected>Open this select menu</option>
+            </select>
+    </form>
+    <button id="validationButton" class="btn btn-primary" type="submit" name="validationButton">Ajouter l'article au panier</button>
     </div>
   `;
 
-  document.querySelector(".card").innerHTML = structureCard;
+  document.querySelector(".card").innerHTML = structureCard; 
+}
+
+function insertSelectedTeddyOptionsForm (product_selected_by_id) {
+
+  for (let i = 0; i < product_selected_by_id.colors.length; i++) {
+
+    const structureTeddyOptionsForm = `
+    <option value="${i}">${product_selected_by_id.colors[i]}</option>        
+  `;
+
+  document.querySelector("#product-option").innerHTML += structureTeddyOptionsForm;
+
+  }
   
 }
 
-function insertSelectedCameraCard (product_selected_by_id) {
+function insertSelectedCameraOptionsForm (product_selected_by_id) {
 
-  const structureCard = `
-    <img src="${product_selected_by_id.imageUrl}" class="d-block w-100" alt="${product_selected_by_id.name}" />
-    <div class="card-body">
-      <h5 class="card-title">Product Name : <span>${product_selected_by_id.name}</span></h5>
-      <p class="card-text">Price : <span>${product_selected_by_id.price}</span></p>
-      <p class="card-text">Description : <span>${product_selected_by_id.description}</span></p>
-      <label for="option-select">Choose a option:</label>
-        <select class="form-select" aria-label="Product options select">
-          <option selected>Open this select menu</option>
-          <option value="1">${product_selected_by_id.lenses[0]}</option>
-          <option value="2">${product_selected_by_id.lenses[1]}</option>
-          <option value="3">${product_selected_by_id.lenses[2]}</option>
-        </select>>
-    </div>
+  for (let i = 0; i < product_selected_by_id.lenses.length; i++) {
+
+    const structureCameraOptionsForm = `
+    <option value="${i}">${product_selected_by_id.lenses[i]}</option>        
   `;
 
-  document.querySelector(".card").innerHTML = structureCard;
+  document.querySelector("#product-option").innerHTML += structureCameraOptionsForm;
+
+  }
   
 }
 
-function insertSelectedFurnitureCard (product_selected_by_id) {
+function insertSelectedFurnitureOptionsForm (product_selected_by_id) {
 
-  const structureCard = `
-    <img src="${product_selected_by_id.imageUrl}" class="d-block w-100" alt="${product_selected_by_id.name}" />
-    <div class="card-body">
-      <h5 class="card-title">Product Name : <span>${product_selected_by_id.name}</span></h5>
-      <p class="card-text">Price : <span>${product_selected_by_id.price}</span></p>
-      <p class="card-text">Description : <span>${product_selected_by_id.description}</span></p>
-      <label for="option-select">Choose a option:</label>
-        <select class="form-select" aria-label="Product options select">
-          <option selected>Open this select menu</option>
-          <option value="1">${product_selected_by_id.varnish[0]}</option>
-          <option value="2">${product_selected_by_id.varnish[1]}</option>
-          <option value="3">${product_selected_by_id.varnish[2]}</option>
-        </select>>
-    </div>
+  for (let i = 0; i < product_selected_by_id.varnish.length; i++) {
+
+    const structureFurnitureCameraOptionsForm = `
+    <option value="${i}">${product_selected_by_id.varnish[i]}</option>        
   `;
 
-  document.querySelector(".card").innerHTML = structureCard;
+  document.querySelector("#product-option").innerHTML += structureFurnitureCameraOptionsForm;
+
+  }
   
 }
 
@@ -103,19 +76,19 @@ function fetch_search_product (url) {
 
     console.log(product_selected_by_id);
 
+    insertSelectedCard(product_selected_by_id);
+
     switch (url) {
-      case url_teddies : insertSelectedTeddyCard(product_selected_by_id);
+      case url_teddies : insertSelectedTeddyOptionsForm(product_selected_by_id);
       break;
-      case url_cameras : insertSelectedCameraCard(product_selected_by_id);
+      case url_cameras : insertSelectedCameraOptionsForm(product_selected_by_id);
       break;
-      case url_furniture : insertSelectedFurnitureCard(product_selected_by_id);
+      case url_furniture : insertSelectedFurnitureOptionsForm(product_selected_by_id);
       break;
       default:
         console.log(`Error`);
     }
-
-    // insertSelectedCard(product_selected_by_id);
-       
+            
   })
   .catch(function(error) {
      console.log(error);
