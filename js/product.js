@@ -60,6 +60,7 @@ function insertSelectedFurnitureOptionsForm (product_selected_by_id) {
   `;
 
   document.querySelector("#product-option").innerHTML += structureFurnitureCameraOptionsForm;
+  // console.log(document.querySelector("#product-option"));
 
   }
   
@@ -88,6 +89,8 @@ function fetch_search_product (url) {
       default:
         console.log(`Error`);
     }
+
+    console.log(document.querySelector("#product-option"));
             
   })
   .catch(function(error) {
