@@ -28,10 +28,10 @@ function insertSelectedCard (product_selected_by_id) {
 
   console.log(options);
 
-  options.forEach(function(option,key) {
+  options.forEach(function(option) {
 
     structureCard += `
-    <option value="${key}">${option}</option>        
+    <option value="${option}">${option}</option>        
     `;
   });
 
@@ -54,19 +54,45 @@ function fetch_search_product (url) {
 
     const product_selected_by_id = data.find((product) => product._id === _id);
 
-    console.log(product_selected_by_id);
-
     insertSelectedCard(product_selected_by_id);
 
-    let productForm = document.querySelector("#product-option");
-
-    console.log(productForm);
-
     let btn_shoppingCart = document.querySelector("#validationButton");
-
     console.log(btn_shoppingCart);
 
-    // btn_shoppingCart.addEventListener("click", ()=> );
+    btn_shoppingCart.addEventListener("click", (event)=>{
+      event.preventDefault();
+      
+      let optionSelectedByForm = document.querySelector("#product-option").value;
+      console.log(optionSelectedByForm);
+
+      let selectedProduct = {
+        selectedProductName : product_selected_by_id.name,
+        selectedIdName : product_selected_by_id._id,
+        selectedIdDescription : product_selected_by_id.description,
+        selectedIdPrice : product_selected_by_id.price,
+        selectedIdOption : optionSelectedByForm,
+      };
+      
+      console.log(selectedProduct);
+
+      let productInLocalStorage = JSON.parse(localStorage.getItem("product"));
+      console.log(productInLocalStorage);
+
+      if (productInLocalStorage) {
+        productInLocalStorage.push(selectedProduct);
+        localStorage.setItem("product", JSON.stringify(productInLocalStorage));
+
+        console.log(productInLocalStorage);
+      }
+      else {
+        productInLocalStorage = [];
+        productInLocalStorage.push(selectedProduct);
+        localStorage.setItem("product", JSON.stringify(productInLocalStorage));
+
+        console.log(productInLocalStorage);
+      }
+
+    });
             
   })
   .catch(function(error) {
