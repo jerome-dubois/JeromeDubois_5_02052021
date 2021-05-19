@@ -18,7 +18,9 @@ function insertCard (_id, name, price, imageUrl) {
     </div> 
     `;
 
-    document.querySelector(".container-products").innerHTML += structureCard; 
+    document.querySelector(".container-products").innerHTML += structureCard;
+
+    return true;
     
 }
 
@@ -31,6 +33,7 @@ function fetch_insertCards (url) {
        
     data.forEach(element => insertCard(element._id, element.name, element.price, element.imageUrl));
     
+    return true;
   })
 
   .catch(function(error) {
