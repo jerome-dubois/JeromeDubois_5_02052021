@@ -1,6 +1,6 @@
-const url_product_id = new URLSearchParams(window.location.search);
+var url_product_id = new URLSearchParams(window.location.search);
 
-const _id = url_product_id.get("id");
+var _id = url_product_id.get("id");
 
 function insertSelectedCard (product_selected_by_id) {
 
@@ -65,31 +65,49 @@ function fetch_search_product (url) {
       let optionSelectedByForm = document.querySelector("#product-option").value;
       console.log(optionSelectedByForm);
 
+      let productQuantity = 1 ;
+           
       let selectedProduct = {
-        selectedProductName : product_selected_by_id.name,
-        selectedIdName : product_selected_by_id._id,
-        selectedIdDescription : product_selected_by_id.description,
-        selectedIdPrice : product_selected_by_id.price,
-        selectedIdOption : optionSelectedByForm,
+        selectedProductId : product_selected_by_id._id,
+        selectedProductOption : optionSelectedByForm,
+        selectedProductQuantity : productQuantity,
       };
       
       console.log(selectedProduct);
 
-      let productInLocalStorage = JSON.parse(localStorage.getItem("product"));
-      console.log(productInLocalStorage);
+      let productsInLocalStorage = JSON.parse(localStorage.getItem("product"));
+      console.log(productsInLocalStorage);
 
-      if (productInLocalStorage) {
-        productInLocalStorage.push(selectedProduct);
-        localStorage.setItem("product", JSON.stringify(productInLocalStorage));
+      // s'il y a déjà des produits dans le local Storage, on y recherche le produit sélectionné:
+      // 1. s'il n'est pas présent, on l'insère avec une quantité initiale de 1
+      // 2. s'il y est déjà présent, on incrémente sa quantité de 1
+        
+      if (productsInLocalStorage) {
 
-        console.log(productInLocalStorage);
+        let productFoundInStorage = productsInLocalStorage.find((product) => product.selectedProductId === _id && product.selectedProductOption == optionSelectedByForm);
+        console.log(productFoundInStorage);
+
+        if (productFoundInStorage == undefined) {
+
+          productsInLocalStorage.push(selectedProduct);
+          localStorage.setItem("product", JSON.stringify(productsInLocalStorage));
+
+        } else {
+
+          productFoundInStorage.selectedProductQuantity++;
+          localStorage.setItem("product", JSON.stringify(productsInLocalStorage));
+
+        }              
+          
       }
+      // s'il y a pas de produits dans le local Storage, insertion du produit sélectionné avec quantité égale à 1
       else {
-        productInLocalStorage = [];
-        productInLocalStorage.push(selectedProduct);
-        localStorage.setItem("product", JSON.stringify(productInLocalStorage));
 
-        console.log(productInLocalStorage);
+        productsInLocalStorage = [];
+        productsInLocalStorage.push(selectedProduct);
+        localStorage.setItem("product", JSON.stringify(productsInLocalStorage));
+
+        console.log(productsInLocalStorage);
       }
 
     });
