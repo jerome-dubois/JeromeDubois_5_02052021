@@ -52,7 +52,7 @@ function fetch_search_product (url) {
   .then((resp) => resp.json())
   .then(function(data) {   
 
-    const product_selected_by_id = data.find((product) => product._id === _id);
+    let product_selected_by_id = data.find((product) => product._id === _id);
 
     insertSelectedCard(product_selected_by_id);
 
@@ -73,42 +73,75 @@ function fetch_search_product (url) {
         selectedProductQuantity : productQuantity,
       };
       
-      console.log(selectedProduct);
+      // déclaration des objets correspondants aux 3 clés du Local Storage "teddies", "cameras" et "furniture"
 
-      let productsInLocalStorage = JSON.parse(localStorage.getItem("product"));
-      console.log(productsInLocalStorage);
+      let teddiesInLocalStorage = JSON.parse(localStorage.getItem("teddies"));
+      let camerasInLocalStorage = JSON.parse(localStorage.getItem("cameras"));
+      let furnitureInLocalStorage = JSON.parse(localStorage.getItem("furniture"));
 
-      // s'il y a déjà des produits dans le local Storage, on y recherche le produit sélectionné:
-      // 1. s'il n'est pas présent, on l'insère avec une quantité initiale de 1
-      // 2. s'il y est déjà présent, on incrémente sa quantité de 1
-        
-      if (productsInLocalStorage) {
+      // lorsque les clés existent, on recherche parmi les valeurs celle correspondant au produit sélectionné
 
-        let productFoundInStorage = productsInLocalStorage.find((product) => product.selectedProductId === _id && product.selectedProductOption == optionSelectedByForm);
-        console.log(productFoundInStorage);
-
-        if (productFoundInStorage == undefined) {
-
-          productsInLocalStorage.push(selectedProduct);
-          localStorage.setItem("product", JSON.stringify(productsInLocalStorage));
-
-        } else {
-
-          productFoundInStorage.selectedProductQuantity++;
-          localStorage.setItem("product", JSON.stringify(productsInLocalStorage));
-
-        }              
-          
+      if (teddiesInLocalStorage != undefined) {
+        var teddyFoundInStorage = teddiesInLocalStorage.find((product) => product.selectedProductId === _id && product.selectedProductOption == optionSelectedByForm);
       }
-      // s'il y a pas de produits dans le local Storage, insertion du produit sélectionné avec quantité égale à 1
-      else {
-
-        productsInLocalStorage = [];
-        productsInLocalStorage.push(selectedProduct);
-        localStorage.setItem("product", JSON.stringify(productsInLocalStorage));
-
-        console.log(productsInLocalStorage);
+      
+      if (camerasInLocalStorage != undefined) {
+        var cameraFoundInStorage = camerasInLocalStorage.find((product) => product.selectedProductId === _id && product.selectedProductOption == optionSelectedByForm);
       }
+
+      if (furnitureInLocalStorage != undefined) {
+        var furnitureFoundInStorage = furnitureInLocalStorage.find((product) => product.selectedProductId === _id && product.selectedProductOption == optionSelectedByForm);
+      }  
+
+      // ensuite, on teste à chaque passage successif sur les 3 API, lorsque que le 
+      // produit sélectionné dans la page produit est trouvé dans l'API interrogée, 3 cas différents suivants:
+      // 1. si la clé correspondante à l'API testée n'existe pas, on la crée et on y insére le produit,
+      // 2. si la clé existe mais que le produit n'apparaît pas dans les valeurs de cette clé, on y insère simplement le produit,
+      // 3. enfin, si la clé existe et que le produit apparaît dans cette clé, on incrémente sa quantité de 1.
+
+      switch (url) {
+        case url_teddies :
+          if (teddiesInLocalStorage == undefined) {
+            let teddies = [];
+            teddies.push(selectedProduct);
+            localStorage.setItem("teddies", JSON.stringify(teddies));
+          } else if (teddiesInLocalStorage != undefined && teddyFoundInStorage == undefined) {
+            teddiesInLocalStorage.push(selectedProduct);
+            localStorage.setItem("teddies", JSON.stringify(teddiesInLocalStorage));
+          } else if (teddiesInLocalStorage !== undefined && teddyFoundInStorage !== undefined) {
+            teddyFoundInStorage.selectedProductQuantity++;
+            localStorage.setItem("teddies", JSON.stringify(teddiesInLocalStorage));
+          }
+          break;
+        case url_cameras :
+          if (camerasInLocalStorage == undefined) {
+            let cameras = [];
+            cameras.push(selectedProduct);
+            localStorage.setItem("cameras", JSON.stringify(cameras));
+          } else if (camerasInLocalStorage != undefined && cameraFoundInStorage == undefined) {
+            camerasInLocalStorage.push(selectedProduct);
+            localStorage.setItem("cameras", JSON.stringify(camerasInLocalStorage));
+          } else if (camerasInLocalStorage !== undefined && cameraFoundInStorage !== undefined) {
+            cameraFoundInStorage.selectedProductQuantity++;
+            localStorage.setItem("cameras", JSON.stringify(camerasInLocalStorage));
+          }
+          break;
+        case url_furniture :
+          if (furnitureInLocalStorage == undefined) {
+            let furniture = [];
+            furniture.push(selectedProduct);
+            localStorage.setItem("furniture", JSON.stringify(furniture));
+          } else if (furnitureInLocalStorage != undefined && furnitureFoundInStorage == undefined) {
+            furnitureInLocalStorage.push(selectedProduct);
+            localStorage.setItem("furniture", JSON.stringify(furnitureInLocalStorage));
+          } if (furnitureInLocalStorage !== undefined && furnitureFoundInStorage !== undefined) {
+            furnitureFoundInStorage.selectedProductQuantity++;
+            localStorage.setItem("furniture", JSON.stringify(furnitureInLocalStorage));
+          }
+          break;
+          default:
+            console.log(`Error`);
+      } 
 
     });
             
@@ -117,7 +150,6 @@ function fetch_search_product (url) {
      console.log(error);
   });
 
-}
+};
 
 url_array.forEach(element => fetch_search_product(element));
-
