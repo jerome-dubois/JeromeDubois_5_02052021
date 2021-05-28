@@ -75,9 +75,9 @@ function fetch_search_product (url) {
       
       // déclaration des objets correspondants aux 3 clés du Local Storage "teddies", "cameras" et "furniture"
 
-      let teddiesInLocalStorage = JSON.parse(localStorage.getItem("teddies"));
-      let camerasInLocalStorage = JSON.parse(localStorage.getItem("cameras"));
-      let furnitureInLocalStorage = JSON.parse(localStorage.getItem("furniture"));
+      var teddiesInLocalStorage = JSON.parse(localStorage.getItem("teddies"));
+      var camerasInLocalStorage = JSON.parse(localStorage.getItem("cameras"));
+      var furnitureInLocalStorage = JSON.parse(localStorage.getItem("furniture"));
 
       // lorsque les clés existent, on recherche parmi les valeurs celle correspondant au produit sélectionné
 
@@ -152,4 +152,6 @@ function fetch_search_product (url) {
 
 };
 
-url_array.forEach(element => fetch_search_product(element));
+// url_array.forEach(element => fetch_search_product(element));
+
+fetch_search_product(url_array[0]);

@@ -1,8 +1,7 @@
-var productsInLocalStorage = JSON.parse(localStorage.getItem("product"));
-console.log(productsInLocalStorage);
-
 var priceProducts = [];
-// console.log(priceProducts);
+var teddiesInLocalStorage = JSON.parse(localStorage.getItem("teddies"));
+console.log(teddiesInLocalStorage);
+var productsInLocalStorage = teddiesInLocalStorage;
 
 function insert_products_in_shopping_cart (url) {
 
@@ -35,8 +34,6 @@ function insert_products_in_shopping_cart (url) {
                 }
                                    
             }       
-
-
             
         }
     
@@ -47,9 +44,11 @@ function insert_products_in_shopping_cart (url) {
   
 }
   
-url_array.forEach(element => insert_products_in_shopping_cart(element));
-console.log (url_array);
+// url_array.forEach(element => insert_products_in_shopping_cart(element));
+// console.log (url_array);
 // console.log (url_array.length);
+
+insert_products_in_shopping_cart(url_array[0]);
 
 // console.log(priceProducts);
 setTimeout(function() {

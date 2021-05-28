@@ -42,4 +42,6 @@ function fetch_insertCards (url) {
 
 }
 
-url_array.forEach(element => fetch_insertCards(element));
+// url_array.forEach(element => fetch_insertCards(element));
+
+fetch_insertCards(url_array[0]);
