@@ -45,12 +45,9 @@ function insert_products_in_shopping_cart (url) {
 }
   
 // url_array.forEach(element => insert_products_in_shopping_cart(element));
-// console.log (url_array);
-// console.log (url_array.length);
 
 insert_products_in_shopping_cart(url_array[0]);
 
-// console.log(priceProducts);
 setTimeout(function() {
     console.log(priceProducts.length);
     var sum = 0;    
@@ -72,15 +69,34 @@ setTimeout(function() {
 
 
 var btnOrderConfirmation = document.querySelector("#btnOrderConfirmation");
-console.log(btnOrderConfirmation);
 
 btnOrderConfirmation.addEventListener("click", () => {
 
-    let firstNameForm = document.querySelector("#inputFirstName");
-    console.log(firstNameForm);
-    let firstNameFormValue = document.querySelector("#inputFirstName").value;
-    console.log(firstNameFormValue);
-    localStorage.setItem("firstName", document.querySelector("#inputFirstName").value);
+    var contact = {    
+        firstName: document.querySelector("#inputFirstName").value,
+        lastName: document.querySelector("#inputLastName").value,
+        address: document.querySelector("#inputAddress").value,
+        city: document.querySelector("#inputCity").value,
+        email: document.querySelector("#inputEmail").value
+    }
+
+    localStorage.setItem("contact", JSON.stringify(contact));
+    
+    var databackEnd = {
+        contact,
+        teddiesInLocalStorage
+    }
+
+    var promise1 = fetch('http://localhost:3000/api/teddies/order', {
+        method: "POST",
+        body: JSON.stringify(databackEnd),
+        headers : {
+            "Content-Type" : "application/json",
+        },
+    });
+    
+    console.log(teddiesInLocalStorage);
+    console.log(promise1);      
 
 });
 

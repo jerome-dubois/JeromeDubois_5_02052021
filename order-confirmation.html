@@ -11,7 +11,7 @@
     
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    <title>Panier</title>
+    <title>Accueil</title>
 </head>
 <body>
     <div class="container jumbotron">
@@ -42,59 +42,18 @@
         <div class="row">
           <div class="col">
             <h1>Titre 1</h1>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
-            </svg>
-            <img src="node_modules\bootstrap-icons\icons\arrow-bar-right.svg" width="32" height="32">
             <p>HERO SECTION</p>
           </div>
         </div>
-          
-        <div class="row">
-          <div class="col-12">
-            <div class="card">                 
-            </div>
-          </div>            
+        
+        <div class="order-confirmation">
+            <div>Merci pour votre commande.</div>
+            <p>Votre commande n°XXX a bien été prise en compte.</p>
+            <p>Le montant de votre commande est de : XXX €</p>
         </div>
-      
-        <form>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="inputFirstName">Prénom</label>
-              <input type="text" class="form-control" id="inputFirstName" placeholder="Prénom">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="inputLastName">Nom</label>
-              <input type="text" class="form-control" id="inputLastName" placeholder="Nom">
-            </div>
-          </div>          
-          <div class="form-group">
-            <label for="inputAddress">Adresse de livraison</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-          </div>          
-          <div class="form-row">
-            <div class="form-group col-md-2">
-              <label for="inputZip">Code postal</label>
-              <input type="text" class="form-control" id="inputZip">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="inputCity">Ville</label>
-              <input type="text" class="form-control" id="inputCity">
-            </div>
-            <div class="form-group col-md-4">
-              <label for="inputState">Pays</label>
-              <input type="text" class="form-control" id="inputState">
-            </div>
-            <div class="form-group">
-              <label for="inputEmail">Email</label>
-              <input type="email" class="form-control" id="inputEmail" placeholder="Email" required>
-            </div>          
-          </div>
-          <button type="submit" class="btn btn-primary" id ="btnOrderConfirmation" name="sendForm" formaction="order-confirmation.html">Confirmation de la commande</button>
-        </form>
-
+        
       </main>
-      
+
       <footer>
         <div class="bg-light">
           <div class="container">
@@ -123,6 +82,5 @@
 
     <script src="js/index.js"></script>
     <script src="js/product.js"></script>
-    <script src="js/shopping-cart.js"></script>
 </body>
 </html>
