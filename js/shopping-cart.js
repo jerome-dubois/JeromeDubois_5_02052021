@@ -1,5 +1,12 @@
 var priceProducts = [];
-var teddiesInLocalStorage = JSON.parse(localStorage.getItem("teddies"));
+
+if (localStorage.getItem("teddies") != undefined) {
+    var teddiesInLocalStorage = JSON.parse(localStorage.getItem("teddies"));
+}
+
+console.log("key teddies json");
+console.log(localStorage.getItem("teddies"));
+
 console.log(teddiesInLocalStorage);
 var productsInLocalStorage = teddiesInLocalStorage;
 
@@ -71,7 +78,7 @@ setTimeout(function() {
 var btnOrderConfirmation = document.querySelector("#btnOrderConfirmation");
 
 btnOrderConfirmation.addEventListener("click", () => {
-
+    
     var contact = {    
         firstName: document.querySelector("#inputFirstName").value,
         lastName: document.querySelector("#inputLastName").value,
@@ -82,21 +89,45 @@ btnOrderConfirmation.addEventListener("click", () => {
 
     localStorage.setItem("contact", JSON.stringify(contact));
     
+    var products = JSON.stringify(teddiesInLocalStorage);
+
+    var products = [];
+
+    teddiesInLocalStorage.forEach(element => products.push(element.selectedProductId));
+    console.log(products);
+
     var databackEnd = {
         contact,
-        teddiesInLocalStorage
+        products
     }
 
+    // var promise1 = fetch('http://localhost:3000/api/teddies/order', {
+    //     method: "POST",
+    //     body: JSON.stringify(databackEnd),
+    //     // {
+    //     //   'contact': contact,
+    //     //   'products': JSON.stringify(teddiesInLocalStorage),
+            
+    //     // },
+    //     headers : {
+    //         "Content-Type" : "application/json",
+    //     },
+    // });
+
     var promise1 = fetch('http://localhost:3000/api/teddies/order', {
-        method: "POST",
-        body: JSON.stringify(databackEnd),
-        headers : {
-            "Content-Type" : "application/json",
-        },
+    method: 'post',
+    body: JSON.stringify(databackEnd),   
     });
+
+    console.log(promise1);
     
+    // .then(function(response) {
+    // return response.json();
+    // });
+    // .catch(function(error) {
+    //     console.log(error);
+    // });
+          
     console.log(teddiesInLocalStorage);
-    console.log(promise1);      
-
+            
 });
-
