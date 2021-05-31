@@ -89,7 +89,7 @@ btnOrderConfirmation.addEventListener("click", () => {
 
     localStorage.setItem("contact", JSON.stringify(contact));
     
-    var products = JSON.stringify(teddiesInLocalStorage);
+    // var products = JSON.stringify(teddiesInLocalStorage);
 
     var products = [];
 
@@ -97,9 +97,11 @@ btnOrderConfirmation.addEventListener("click", () => {
     console.log(products);
 
     var databackEnd = {
-        contact,
-        products
+        "contact" : contact,
+        "products" : products 
     }
+
+    console.log(databackEnd);
 
     // var promise1 = fetch('http://localhost:3000/api/teddies/order', {
     //     method: "POST",
@@ -116,7 +118,8 @@ btnOrderConfirmation.addEventListener("click", () => {
 
     var promise1 = fetch('http://localhost:3000/api/teddies/order', {
     method: 'post',
-    body: JSON.stringify(databackEnd),   
+    body: databackEnd,
+    headers: {"Content-type" : "application/json"}
     });
 
     console.log(promise1);
