@@ -102,28 +102,7 @@ btnOrderConfirmation.addEventListener("click", () => {
     }
 
     console.log(databackEnd);
-
-    // var promise1 = fetch('http://localhost:3000/api/teddies/order', {
-    //     method: "POST",
-    //     body: JSON.stringify(databackEnd),
-    //     // {
-    //     //   'contact': contact,
-    //     //   'products': JSON.stringify(teddiesInLocalStorage),
-            
-    //     // },
-    //     headers : {
-    //         "Content-Type" : "application/json",
-    //     },
-    // });
-
-    // var promise1 = fetch('http://localhost:3000/api/teddies/order', {
-    // method: 'POST',
-    // body: JSON.stringify(databackEnd),
-    // headers : {"Content-type" : "application/json"},    
-    // });
-
-    // console.log(promise1);
-    
+       
     fetch('http://localhost:3000/api/teddies/order', {
     method: 'POST',
     body: JSON.stringify(databackEnd),
@@ -132,15 +111,8 @@ btnOrderConfirmation.addEventListener("click", () => {
     // .then((response) => response.json())
     // .catch(() => {
     //   alert(error)
-    // })
-
-    // .then(function(response) {
-    // return response.json();
     // });
-    // .catch(function(error) {
-    //     console.log(error);
-    // });
-          
+             
     console.log(teddiesInLocalStorage);
             
 });

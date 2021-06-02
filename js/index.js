@@ -7,18 +7,22 @@ const url_array = [url_teddies, url_cameras, url_furniture];
 function insertCard (_id, name, price, imageUrl) {
 
     const structureCard = `
-    <div class="col-12 col-lg-4">
-      <a class="card" href="product.html?id=${_id}">                  
-          <img src="${imageUrl}" class="d-block w-100 imgcover" alt="${name}">
-          <div class="card-body">
-              <h5 class="card-title">Product Name : <span>${name}</span></h5>
-              <p class="card-text">Price : <span>${price}</span></p>
-          </div>
+    <div class="col-12 col-md-6 col-xl-4">
+      <a class="card product-card p-4" href="product.html?id=${_id}">                  
+        <img src="${imageUrl}" class="d-block w-100 imgcover product-card__img" alt="${name}">
+        <div class="product-card__description mt-2">
+            <div class="product-card__heading">
+              <h5 class="card-title"><span>${name}</span></h5>                
+            </div>
+            <div>
+              <p class="card-text product-card__price"><span>${price/100}.00 €</span></p>
+            </div>
+        </div>
       </a>
     </div> 
     `;
 
-    document.querySelector(".container-products").innerHTML += structureCard;
+    document.querySelector(".products__list").innerHTML += structureCard;
 
     return true;
     
