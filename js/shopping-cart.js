@@ -75,10 +75,12 @@ setTimeout(function() {
 }, 1000);
 
 
-var btnOrderConfirmation = document.querySelector("#btnOrderConfirmation");
+var btnOrderConfirmation = document.getElementById("btnOrderConfirmation");
 
-btnOrderConfirmation.addEventListener("click", () => {
+btnOrderConfirmation.addEventListener("click", (e) => {
     
+    // e.preventDefault();    
+
     var contact = {    
         firstName: document.querySelector("#inputFirstName").value,
         lastName: document.querySelector("#inputLastName").value,
@@ -88,8 +90,6 @@ btnOrderConfirmation.addEventListener("click", () => {
     }
 
     localStorage.setItem("contact", JSON.stringify(contact));
-    
-    // var products = JSON.stringify(teddiesInLocalStorage);
 
     var products = [];
 
@@ -107,12 +107,18 @@ btnOrderConfirmation.addEventListener("click", () => {
     method: 'POST',
     body: JSON.stringify(databackEnd),
     headers : {"Content-type" : "application/json"},    
-    });
-    // .then((response) => response.json())
-    // .catch(() => {
-    //   alert(error)
-    // });
-             
-    console.log(teddiesInLocalStorage);
+    })    
+    .then(response => response.json())
+    .then(function(data) {                
+        
+        window.location.href = `order-confirmation.html?orderId=${data.orderId}`;
+        
+    })
+    .then(localStorage.removeItem("teddies"))    
+    .catch((error) => {
+      alert(error)
+    });       
+
+    // document.getElementById("formOrderConfirmation").submit();
             
 });
