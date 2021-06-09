@@ -1,3 +1,9 @@
+var url_teddies = 'http://localhost:3000/api/teddies';
+var url_cameras = 'http://localhost:3000/api/cameras';
+var url_furniture = 'http://localhost:3000/api/furniture';
+
+var url_array = [url_teddies, url_cameras, url_furniture];
+
 var url_product_id = new URLSearchParams(window.location.search);
 
 var _id = url_product_id.get("id");
@@ -162,7 +168,3 @@ function insertSelectedProduct (product_selected_by_id) {
 
   document.querySelector(".card").innerHTML = structureCard; 
 }
-
-// product search with fetch promise on url API
-
-

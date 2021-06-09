@@ -1,8 +1,8 @@
-const url_teddies = 'http://localhost:3000/api/teddies';
-const url_cameras = 'http://localhost:3000/api/cameras';
-const url_furniture = 'http://localhost:3000/api/furniture';
+var url_teddies = 'http://localhost:3000/api/teddies';
+var url_cameras = 'http://localhost:3000/api/cameras';
+var url_furniture = 'http://localhost:3000/api/furniture';
 
-const url_array = [url_teddies, url_cameras, url_furniture];
+var url_array = [url_teddies, url_cameras, url_furniture];
 
 // url_array.forEach(element => fetch_insertCards(element));
 insertProducts(url_array[0]);
