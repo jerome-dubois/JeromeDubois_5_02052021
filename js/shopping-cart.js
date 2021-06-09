@@ -229,8 +229,8 @@ validateInputForm(document.getElementById("inputEmail"), (event) => {
 
 });
 
-const emailtest = "f.dubois@gmail.c";
-const resultat = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/.test(emailtest);
+const emailtest = ".dubois@gmail.com";
+const resultat = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/.test(emailtest);
 console.log(resultat);
 
 validateInputForm(document.getElementById("inputCity"), (event) => event.target.value.length > 0);
