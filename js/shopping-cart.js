@@ -224,7 +224,7 @@ validateInputForm(document.getElementById("inputZipCode"), (event) => {
 });
 validateInputForm(document.getElementById("inputEmail"), (event) => {
 
-    const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/
+    const emailRegex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/
     return emailRegex.test(event.target.value)    
 
 });
