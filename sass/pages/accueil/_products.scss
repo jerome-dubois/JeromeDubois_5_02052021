@@ -1,17 +1,25 @@
-.products {
-    background-color: #F2F2F2;
-    padding: 1.5rem;
+.products {    
+    // padding: 1.5rem;
     &__list {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;                       
+        justify-content: space-between;
+        // background-color: $color-tertiary;                     
     }
+}
+
+.card {
+    border: 0!important;
+}
+
+.shadow {
+    border-radius: 30px;
 }
 
 .product-card {
     display: flex;
     flex-direction: column;
-    background-color: $color-primary;
+    background-color: $color-tertiary;
     border-radius: 20px;
     color: black;
     margin: 15px 0px;
@@ -23,7 +31,7 @@
     &__img {
         height: 350px;
         object-fit: cover;
-        border-radius: 20px;
+        border-radius: 20px 20px 0 0;
     }
 
     &__description {

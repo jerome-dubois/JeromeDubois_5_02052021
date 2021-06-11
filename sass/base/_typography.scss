@@ -3,6 +3,18 @@
 //     font-size: 1rem;
 // }
 
+body {
+    // margin: auto;
+    font-family: "Helvetica", sans-serif;
+    // font-style: italic;
+}
+
+// card-body p {
+//     // margin: auto;
+//     font-family: "Helvetica", sans-serif;
+//     // font-style: italic;
+// }
+
 // h1 {
 //     font-family: 'Shrikhand', cursive;
 //     font-weight: 900;
@@ -11,11 +23,26 @@
 //     box-sizing: border-box;
 // }
 
-// h2 {
-//     font-size: 1rem;
-// }
+h2 {
+    font-size: 3rem;
+}
 
-a:hover {
+a {
     color: #000000;
     text-decoration: none!important;
+    &:hover {
+        color: #000000;
+        text-decoration: none!important;
+    }
+
 }
+
+// a:hover {
+//     color: #000000;
+//     text-decoration: none!important;
+// }
+
+// a {
+//     color: #0d6efd;
+//     text-decoration: underline;
+// }

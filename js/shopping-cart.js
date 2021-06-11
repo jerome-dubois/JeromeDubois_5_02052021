@@ -52,12 +52,37 @@ function insert_products_in_shopping_cart (url) {
                         console.log(priceProducts);
                         console.log(priceProducts.length);                
                     }
+
+                    if (i == (productsInLocalStorage.length-1)) {
+
+                        console.log(priceProducts.length);
+                        var sum = 0;    
+                        for (let i = 0 ; i < priceProducts.length ; i++) {
+                            sum += priceProducts[i];    
+                        }  
+                        
+                        console.log("sum");
+                        console.log(sum);
+                            
+                        // localStorage.setItem("orderTotalPrice", JSON.stringify(sum));
+                        localStorage.setItem("orderTotalPrice", sum);
+
+                        let totalPriceShoppingCart = `        
+                            <div class="card-body">            
+                                <p class="card-text">Prix total du panier : <span>${sum}</span></p>
+                            </div>
+                            `;
+                                        
+                        document.querySelector(".card").insertAdjacentHTML("beforeend", totalPriceShoppingCart);
+
+                    }
                                     
                 }       
                 
             }
         
         })
+        // .then()
         .catch(function(error) {
         console.log(error);
         });
@@ -94,29 +119,29 @@ function insert_products_in_shopping_cart (url) {
 
 // totalPriceCalculation();
 
-setTimeout(function totalPriceCalculation() {
+// setTimeout(function totalPriceCalculation() {
              
-    console.log(priceProducts.length);
-    var sum = 0;    
-    for (let i = 0 ; i < priceProducts.length ; i++) {
-        sum += priceProducts[i];    
-    }  
+//     console.log(priceProducts.length);
+//     var sum = 0;    
+//     for (let i = 0 ; i < priceProducts.length ; i++) {
+//         sum += priceProducts[i];    
+//     }  
     
-    console.log("sum");
-    console.log(sum);
+//     console.log("sum");
+//     console.log(sum);
         
-    // localStorage.setItem("orderTotalPrice", JSON.stringify(sum));
-    localStorage.setItem("orderTotalPrice", sum);
+//     // localStorage.setItem("orderTotalPrice", JSON.stringify(sum));
+//     localStorage.setItem("orderTotalPrice", sum);
 
-    let totalPriceShoppingCart = `        
-        <div class="card-body">            
-            <p class="card-text">Prix total du panier : <span>${sum}</span></p>
-        </div>
-        `;
+//     let totalPriceShoppingCart = `        
+//         <div class="card-body">            
+//             <p class="card-text">Prix total du panier : <span>${sum}</span></p>
+//         </div>
+//         `;
                     
-    document.querySelector(".card").insertAdjacentHTML("beforeend", totalPriceShoppingCart);    
+//     document.querySelector(".card").insertAdjacentHTML("beforeend", totalPriceShoppingCart);    
     
-}, 1000);
+// }, 1000);
 
 // function resolveAfter1Second() {
 //     return new Promise(resolve => {
@@ -167,7 +192,7 @@ btnOrderConfirmation.addEventListener("click", (e) => {
     
     e.preventDefault();
 
-    var sum = localStorage.getItem("orderTotalPrice");
+    // var sum = localStorage.getItem("orderTotalPrice");
 
     var contact = {    
         firstName: document.getElementById("inputFirstName").value,

@@ -1,6 +1,5 @@
 header {
-    background-color: $color-primary;
-    border-radius: 20px;
+    background-color: $color-tertiary;    
 	// margin: auto;
     // display: flex;
     // justify-content: center;
@@ -14,4 +13,13 @@ header {
     //     align-items: center;
     //     flex-grow: 1;
     // }
+}
+
+.navbar-brand {
+    width: 250px;
+}
+
+.logo {
+    margin-left: -1rem;
+    width: 100%;
 }

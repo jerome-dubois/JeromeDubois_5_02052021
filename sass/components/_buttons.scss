@@ -1,39 +1,39 @@
-// .main-btn {
-//     padding:1rem 2rem;
-//     border:0;
-//     color: white;
-//     font-size: 1rem;
-//     background-image: linear-gradient(to left top,$color-primary,$color-secondary);
-//     border-radius: 30px;
-//     cursor: pointer;
-//     box-shadow: -2px 2px 8px rgba(0,0,0,0.3);
-//     position: relative;
-//     z-index: 1;
-//     &:hover {
-//         &::after {
-//             opacity: 1;
-//         }
-//     }
+.main-btn {
+    padding:1rem 2rem;
+    border:0;
+    color: white;
+    font-size: 2rem;
+    background-image: linear-gradient(to left top,$color-secondary,$color-primary);
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: -2px 2px 8px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 1;
+    &:hover {
+        &::after {
+            opacity: 1;
+        }
+    }
 
-//     &:active {
-//         border:0;
-//     }
+    &:active {
+        border:0;
+    }
 
-//     &::after {
-//         content:"";
-//         position: absolute;
-//         top: 0;
-//         right: 0;
-//         bottom: 0;
-//         left: 0;
-//         border-radius: 30px;
-//         background: linear-gradient(to left top, lighten($color-primary, 3), lighten($color-secondary, 3));        
-//         box-shadow: -2px 2px 8px rgba(0,0,0,0.6);
-//         opacity: 0;
-//         z-index: -1;
-//         transition: opacity 250ms;
-//     }
-// }
+    &::after {
+        content:"";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-radius: 30px;
+        background: linear-gradient(to left top, lighten($color-secondary, 3), lighten($color-primary, 3));        
+        box-shadow: -2px 2px 8px rgba(0,0,0,0.6);
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 250ms;
+    }
+}
 
 // .operation-btn {
 //     padding:1.5rem 3rem 1.5rem 0.5rem;
