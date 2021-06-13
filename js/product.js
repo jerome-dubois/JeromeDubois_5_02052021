@@ -10,7 +10,7 @@ var _id = url_product_id.get("id");
 
 // url_array.forEach(element => fetch_search_product(element));
 
-searchProduct(url_array[0]);
+searchProduct(url_array[1]);
 
 function searchProduct (url) {
 

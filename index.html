@@ -11,17 +11,21 @@
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script src="https://kit.fontawesome.com/0fe1c064b7.js" crossorigin="anonymous"></script>
 
     <title>Accueil</title>
 </head>
 <body>
     <!-- <div class="container"> -->
 
-      <!-- <header>
-        <div class="row">
-          <div class="col">
-            <nav class="navbar navbar-expand-md navbar-light">
+      <header>
+        <!-- <div class="row"> -->
+          <!-- <div class="col"> -->
+            <!-- <nav class="navbar navbar-expand-md navbar-light">
               <div class="container-fluid">
                 <a class="navbar-brand" href="index.html">
                   <img src="./images/logo-orinoco_fond-gris.png" alt="Le logo d'Orinoco" class="logo">
@@ -34,24 +38,57 @@
                     </ul>
                 </div>
               </div>                
-            </nav>
+            </nav> -->
+          <!-- </div> -->
+        <!-- </div>  -->
+
+        <nav class="navbar navbar-expand-md navbar-light">
+          <div class="container-fluid">
+      
+            <a class="navbar-brand " href="index.html">
+              <img src="./images/logo-orinoco_fond-gris.png" alt="Logo Orinoco" class="logo ">
+            </a>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse justify-content-end collapse" id="navbarNavDropdown" style="">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="active" aria-current="page" href="index.html">Home
+                    <img src="./images/outline_home_degrade.png" alt="cart icon" class="cartIcon">
+                  </a>
+                </li>
+                <li class="nav-item">      
+                  <a class="cartWrapper" href="shopping-cart.html">Cart
+                    <img src="./images/outline_shopping_cart_degrade.png" alt="cart icon" class="cartIcon">
+                    <!-- <span class="cartNum" id="cartNum">0</span> -->
+                  </a>
+                </li>
+      
+              </ul>
+            </div>
+      
           </div>
-        </div> 
-      </header> -->
+        </nav>    
+
+      </header>
       
       <main>
         
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-          <div class="overlay"></div>
-          <ol class="carousel-indicators">
+          <!-- <div class="overlay"></div>         -->
+          <!-- <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div class="carousel-item carousel-parent active">
-              <img class="d-block w-100 imgcover zindex-1" src="http://localhost:3000/images/vcam_1_2250_1500.jpg" alt="First slide" />
-              <div class="search zindex1">
+          </ol> -->
+          <div class="carousel-inner" id="slides-carousel">
+            <!-- <div class="carousel-item carousel-parent">              
+              <img class="d-block w-100 imgcover" src="http://localhost:3000/images/vcam_1_2250_1500.jpg" alt="First slide" />                        
+              <a href="product.html?id=5be1ed3f1c9d44000030b061">
+                <div class="overlay"></div>
+              </a>              
+              <div class="search">
                 <h1>Get the camera that suits you</h1>
                 <p>Discover our cameras, selected by us.</p>
                 <a href="#our-cameras">
@@ -64,8 +101,9 @@
               </div>
             </div>
             <div class="carousel-item carousel-parent">
-              <img class="d-block w-100 imgcover zindex-1" src="http://localhost:3000/images/vcam_2_2250_1500.jpg" alt="Second slide">
-              <div class="search zindex1">
+              <img class="d-block w-100 imgcover" src="http://localhost:3000/images/vcam_2_2250_1500.jpg" alt="Second slide">
+              <div class="overlay"></div>
+              <div class="search">
                 <h1>Get the camera that suits you</h1>
                 <p>Discover our cameras, selected by us.</p>
                 <a href="#our-cameras">
@@ -78,8 +116,9 @@
               </div>
             </div>
             <div class="carousel-item carousel-parent">
-              <img class="d-block w-100 imgcover zindex-1" src="http://localhost:3000/images/vcam_3_2250_1500.jpg" alt="Third slide">
-              <div class="search zindex1">
+              <img class="d-block w-100 imgcover" src="http://localhost:3000/images/vcam_3_2250_1500.jpg" alt="Third slide">
+              <div class="overlay"></div>
+              <div class="search">
                 <h1>Get the camera that suits you</h1>
                 <p>Discover our cameras, selected by us.</p>
                 <a href="#our-cameras">
@@ -92,8 +131,9 @@
               </div>
             </div>
             <div class="carousel-item carousel-parent">
-              <img class="d-block w-100 imgcover zindex-1" src="http://localhost:3000/images/vcam_4_2250_1500.jpg" alt="Fourth slide">
-              <div class="search zindex1">
+              <img class="d-block w-100 imgcover" src="http://localhost:3000/images/vcam_4_2250_1500.jpg" alt="Fourth slide">
+              <div class="overlay"></div>
+              <div class="search">
                 <h1>Get the camera that suits you</h1>
                 <p>Discover our cameras, selected by us.</p>
                 <a href="#our-cameras">
@@ -106,8 +146,9 @@
               </div>
             </div>
             <div class="carousel-item carousel-parent">
-              <img class="d-block w-100 imgcover zindex-1" src="http://localhost:3000/images/vcam_5_2250_1500.jpg" alt="Fifth slide">
-              <div class="search zindex1">
+              <img class="d-block w-100 imgcover" src="http://localhost:3000/images/vcam_5_2250_1500.jpg" alt="Fifth slide">
+              <div class="overlay"></div>
+              <div class="search">
                 <h1>Get the camera that suits you</h1>
                 <p>Discover our cameras, selected by us.</p>
                 <a href="#our-cameras">
@@ -118,7 +159,7 @@
                 <h5>Katatone</h5>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.n</p>
               </div>
-            </div>
+            </div> -->
           </div>
           <a class="carousel-control-prev ms-2" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -136,25 +177,24 @@
           <div id="products-list" class="products__list row row-cols-1 row-cols-md-2 g-4"></div>
         </div>
 
-      </main>
+      </main>      
 
-      <!-- <footer>
-        <div class="bg-light">
-          <div class="container">
-              <div class="row">
-                <div class="col">
-                  <ul class="list-inline text-center">
-                    <li class="list-inline-item"><a href="#">À propos</a></li>
-                    <li class="list-inline-item">&middot;</li>
-                    <li class="list-inline-item"><a href="#">Vie privée</a></li>
-                    <li class="list-inline-item">&middot;</li>
-                    <li class="list-inline-item"><a href="#">Conditions d'utilisations</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>  
+      <footer>
+        <div class="social">
+          <a href="https://www.facebook.com"><img src="./images/facebook-degrade.svg" alt="facebook" class="socialIcon"></a>
+          <a href="https://www.instagram.com"><img src="./images/instagram-degrade.svg" alt="instagram" class="socialIcon"></a>
+          <a href="https://www.twitter.com"><img src="./images/twitter-degrade.svg" alt="twitter" class="socialIcon"></a>
+          <a href="https://www.youtube.com"><img src="./images/youtube-degrade.svg" alt="youtube" class="socialIcon"></a>
+          <a href="https://www.youtube.com"><img src="./images/linkedin-degrade.svg" alt="linkedin" class="socialIcon"></a>
         </div>
-      </footer>  -->
+        <ul class="list-inline text-center">
+          <li class="list-inline-item"><a href="index.html">Home</a></li>
+          <li class="list-inline-item"><a href="#">Services</a></li>
+          <li class="list-inline-item"><a href="#">About</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul>        
+      </footer>
         
     <!-- </div> -->
 
@@ -163,7 +203,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+    
     <script src="js/index.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 .imgcover {
-  height: 800px;
+  height: 750px;
   object-fit: cover;
 }
 
@@ -9,22 +9,17 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-}
-
-.zindex1 {
-  z-index: 2;
-}
-
-.zindex-1 {
-  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .carousel-parent {
   position: relative;
   transform-style: preserve-3d;
   min-height: 20vh;
+}
+
+main {
+  background-color: #F2F2F2;
 }
 
 body {
@@ -42,6 +37,11 @@ a {
 a:hover {
   color: #000000;
   text-decoration: none !important;
+}
+
+.material-icons {
+  font-size: 48px;
+  color: #935df2;
 }
 
 .main-btn {
@@ -77,17 +77,65 @@ a:hover {
   transition: opacity 250ms;
 }
 
+.container {
+  background-color: #F2F2F2;
+}
+
 header {
   background-color: #e6e6e6;
 }
 
 .navbar-brand {
-  width: 250px;
+  width: 240px;
+}
+
+nav ul li {
+  padding-right: 70px;
+  font-weight: bolder;
+  font-size: x-large;
 }
 
 .logo {
-  margin-left: -1rem;
   width: 100%;
+}
+
+.cartIcon {
+  width: 50px;
+}
+
+footer {
+  padding: 1rem 1.5rem 3rem 1.5rem;
+  color: white;
+  background-color: #e6e6e6;
+}
+footer ul {
+  margin: 0px;
+  padding: 0;
+  list-style: none;
+}
+footer h2 {
+  font-family: "Shrikhand", cursive;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+footer li {
+  margin: 10px 0;
+}
+footer li span i {
+  width: 20px;
+}
+footer li a:link {
+  text-decoration: none;
+  color: black;
+}
+
+.socialIcon {
+  width: 80px;
+  padding: 10px;
+}
+
+.social {
+  text-align: center;
 }
 
 .search {
@@ -119,14 +167,24 @@ header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  background-color: #F2F2F2;
 }
 
 .card {
   border: 0 !important;
+  min-width: 300px;
+  background-color: #F2F2F2;
 }
 
 .shadow {
   border-radius: 30px;
+}
+
+.zoom {
+  transition: transform 0.5s ease;
+}
+.zoom:hover {
+  transform: scale(1.1);
 }
 
 .product-card {
@@ -137,7 +195,6 @@ header {
   color: black;
   margin: 15px 0px;
   text-decoration: none;
-  box-shadow: -2px 2px 8px #c5c5c5;
   min-width: 250px;
   position: relative;
 }
@@ -153,20 +210,11 @@ header {
 }
 .product-card__heading {
   flex: 1;
-}
-.product-card__label {
-  background-color: #e6e6e6;
-  color: #227762;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  border-radius: 0.1rem;
-  padding: 0.5rem;
+  font-weight: bolder;
 }
 .product-card__price {
-  margin-right: 10px;
   font-weight: bolder;
-  width: 4em;
+  width: 5em;
   height: 2em;
   position: relative;
 }

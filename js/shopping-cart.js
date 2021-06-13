@@ -6,185 +6,85 @@ var url_array = [url_teddies, url_cameras, url_furniture];
 
 var priceProducts = [];
 
-if (localStorage.getItem("teddies") != undefined) {
-    var teddiesInLocalStorage = JSON.parse(localStorage.getItem("teddies"));
+if (localStorage.getItem("cameras") != undefined) {
+    var camerasInLocalStorage = JSON.parse(localStorage.getItem("cameras"));
 }
 
-console.log("key teddies json");
-console.log(localStorage.getItem("teddies"));
+console.log("key cameras json");
+console.log(localStorage.getItem("cameras"));
 
-console.log(teddiesInLocalStorage);
-var productsInLocalStorage = teddiesInLocalStorage;
+console.log(camerasInLocalStorage);
+var productsInLocalStorage = camerasInLocalStorage;
 
 // url_array.forEach(element => insert_products_in_shopping_cart(element));
 
-insert_products_in_shopping_cart(url_array[0]);
+insert_products_in_shopping_cart(url_array[1]);
 
-function insert_products_in_shopping_cart (url) {
-
-    // return new Promise((resolve) => {         
+function insert_products_in_shopping_cart (url) {             
         
-        fetch(url)
-        .then((resp) => resp.json())
-        .then(function(data) {     
-            
-            if (productsInLocalStorage != undefined) {
+    fetch(url)
+    .then((resp) => resp.json())
+    .then(function(data) {     
+        
+        if (productsInLocalStorage != undefined) {
 
-                for (let i = 0 ; i < productsInLocalStorage.length ; i++) {
-                    
-                    productFoundInApiById = data.find((product) => product._id === productsInLocalStorage[i].selectedProductId);
-                                
-                    if (productFoundInApiById != undefined) {
-
-                        let shoppingCartCard = `
-                        <img src="${productFoundInApiById.imageUrl}" class="d-block w-100" alt="${productFoundInApiById.name}" />
-                        <div class="card-body">
-                            <p class="card-text">Name : <span>${productFoundInApiById.name}</span></p>
-                            <p class="card-text">Option : <span>${productsInLocalStorage[i].selectedProductOption}</span></p>
-                            <p class="card-text">Quantité : <span>${productsInLocalStorage[i].selectedProductQuantity}</span></p>
-                            <p class="card-text">Description : <span>${productFoundInApiById.description}</span></p>
-                            <p class="card-text">Price : <span>${productFoundInApiById.price}</span></p>
-                        </div>
-                    `;
-                        
-                        document.querySelector(".card").innerHTML += shoppingCartCard;
-                        priceProducts.push(productFoundInApiById.price);
-                        console.log(priceProducts);
-                        console.log(priceProducts.length);                
-                    }
-
-                    if (i == (productsInLocalStorage.length-1)) {
-
-                        console.log(priceProducts.length);
-                        var sum = 0;    
-                        for (let i = 0 ; i < priceProducts.length ; i++) {
-                            sum += priceProducts[i];    
-                        }  
-                        
-                        console.log("sum");
-                        console.log(sum);
-                            
-                        // localStorage.setItem("orderTotalPrice", JSON.stringify(sum));
-                        localStorage.setItem("orderTotalPrice", sum);
-
-                        let totalPriceShoppingCart = `        
-                            <div class="card-body">            
-                                <p class="card-text">Prix total du panier : <span>${sum}</span></p>
-                            </div>
-                            `;
-                                        
-                        document.querySelector(".card").insertAdjacentHTML("beforeend", totalPriceShoppingCart);
-
-                    }
-                                    
-                }       
+            for (let i = 0 ; i < productsInLocalStorage.length ; i++) {
                 
-            }
-        
-        })
-        // .then()
-        .catch(function(error) {
-        console.log(error);
-        });
+                productFoundInApiById = data.find((product) => product._id === productsInLocalStorage[i].selectedProductId);
+                            
+                if (productFoundInApiById != undefined) {
 
-        // resolve('resolved');            
+                    let shoppingCartCard = `
+                    <img src="${productFoundInApiById.imageUrl}" class="d-block w-100" alt="${productFoundInApiById.name}" />
+                    <div class="card-body">
+                        <p class="card-text">Name : <span>${productFoundInApiById.name}</span></p>
+                        <p class="card-text">Option : <span>${productsInLocalStorage[i].selectedProductOption}</span></p>
+                        <p class="card-text">Quantité : <span>${productsInLocalStorage[i].selectedProductQuantity}</span></p>
+                        <p class="card-text">Description : <span>${productFoundInApiById.description}</span></p>
+                        <p class="card-text">Price : <span>${productFoundInApiById.price}</span></p>
+                    </div>
+                `;
+                    
+                    document.querySelector(".card").innerHTML += shoppingCartCard;
+                    priceProducts.push(productFoundInApiById.price);
+                    console.log(priceProducts);
+                    console.log(priceProducts.length);                
+                }
 
-    // });    
+                if (i == (productsInLocalStorage.length-1)) {
+
+                    console.log(priceProducts.length);
+                    var sum = 0;    
+                    for (let i = 0 ; i < priceProducts.length ; i++) {
+                        sum += priceProducts[i];    
+                    }  
+                    
+                    console.log("sum");
+                    console.log(sum);
+                        
+                    // localStorage.setItem("orderTotalPrice", JSON.stringify(sum));
+                    localStorage.setItem("orderTotalPrice", sum);
+
+                    let totalPriceShoppingCart = `        
+                        <div class="card-body">            
+                            <p class="card-text">Prix total du panier : <span>${sum}</span></p>
+                        </div>
+                        `;
+                                    
+                    document.querySelector(".card").insertAdjacentHTML("beforeend", totalPriceShoppingCart);
+
+                }
+                                
+            }       
+            
+        }
+    
+    })
+    .catch(function(error) {
+    console.log(error);
+    });    
       
 }
-
-// async function totalPriceCalculation() {
-    
-//     await insert_products_in_shopping_cart(url_array[0]);
-
-//     var sum = 0;    
-//     for (let i = 0 ; i < priceProducts.length ; i++) {
-        
-//         sum += priceProducts[i];
-//         console.log(sum);
-
-//         var totalPriceShoppingCart = `        
-//             <div class="card-body">            
-//                 <p class="card-text">Prix total du panier : <span>${sum}</span></p>
-//             </div>
-//             `;
-                        
-//         document.querySelector(".card").insertAdjacentHTML("beforeend", totalPriceShoppingCart);
-
-//         console.log(totalPriceShoppingCart);
-
-//     }  
-      
-// }
-
-// totalPriceCalculation();
-
-// setTimeout(function totalPriceCalculation() {
-             
-//     console.log(priceProducts.length);
-//     var sum = 0;    
-//     for (let i = 0 ; i < priceProducts.length ; i++) {
-//         sum += priceProducts[i];    
-//     }  
-    
-//     console.log("sum");
-//     console.log(sum);
-        
-//     // localStorage.setItem("orderTotalPrice", JSON.stringify(sum));
-//     localStorage.setItem("orderTotalPrice", sum);
-
-//     let totalPriceShoppingCart = `        
-//         <div class="card-body">            
-//             <p class="card-text">Prix total du panier : <span>${sum}</span></p>
-//         </div>
-//         `;
-                    
-//     document.querySelector(".card").insertAdjacentHTML("beforeend", totalPriceShoppingCart);    
-    
-// }, 1000);
-
-// function resolveAfter1Second() {
-//     return new Promise(resolve => {
-
-//         setTimeout(() => {
-
-//             console.log(priceProducts.length);
-//             var sum = 0;    
-//             for (let i = 0 ; i < priceProducts.length ; i++) {
-//                 sum += priceProducts[i];    
-//             }  
-            
-//             // console.log("sum");
-//             // console.log(sum);
-        
-//             let totalPriceShoppingCart = `        
-//                 <div class="card-body">            
-//                     <p class="card-text">Prix total du panier : <span>${sum}</span></p>
-//                 </div>
-//                 `;
-                            
-//             document.querySelector(".card").insertAdjacentHTML("beforeend", totalPriceShoppingCart);
-
-//             resolve();
-
-//         }, 1000);
-
-//         // console.log("sum");
-//         // console.log(sum);
-
-//         return sum;
-    
-//     });
-
-// }
-  
-// async function f1() {
-//     var x = await resolveAfter1Second();
-//     console.log(x); // 10
-// }
-
-// f1();
-
 
 var btnOrderConfirmation = document.getElementById("btnOrderConfirmation");
 

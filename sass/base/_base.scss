@@ -1,5 +1,5 @@
 .imgcover {
-    height: 800px;
+    height: 750px;
     object-fit: cover;
 }
 
@@ -9,16 +9,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
-
-.zindex1 {
-    z-index: 2;
-}
-
-.zindex-1 {
-    z-index: -1;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .carousel-parent {
@@ -26,3 +17,7 @@
   transform-style: preserve-3d;
   min-height: 20vh;
 }
+
+main {
+  background-color: $color-quaternary;
+} 

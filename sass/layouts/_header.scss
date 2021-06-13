@@ -16,10 +16,19 @@ header {
 }
 
 .navbar-brand {
-    width: 250px;
+    width: 240px;
 }
 
-.logo {
-    margin-left: -1rem;
+nav ul li {
+    padding-right: 70px;
+    font-weight: bolder;
+    font-size:x-large;
+}
+
+.logo {    
     width: 100%;
+}
+
+.cartIcon {
+    width: 50px;;
 }
