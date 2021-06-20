@@ -36,22 +36,7 @@ function insertProducts(url) {
 
 function insertProduct (_id, name, price, description, imageUrl) {
 
-  // const structureCard = `
-  //   <div class="col-12 col-md-6 col-xl-4">
-  //     <a class="card product-card p-4" href="product.html?id=${_id}">                  
-  //       <img src="${imageUrl}" class="d-block w-100 imgcover product-card__img" alt="${name}">
-  //       <div class="product-card__description mt-2">
-  //           <div class="product-card__heading">
-  //             <h5 class="card-title"><span>${name}</span></h5>                
-  //           </div>
-  //           <div>
-  //             <p class="card-text product-card__price"><span>${price/100}.00 €</span></p>
-  //           </div>
-  //       </div>
-  //     </a>
-  //   </div> 
-  // `;
-
+  
   const slideCarousel = `
     <div class="carousel-item carousel-parent">
       <a href="product.html?id=${_id}">            

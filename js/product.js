@@ -26,6 +26,7 @@ function searchProduct (url) {
     console.log(btn_shoppingCart);
 
     btn_shoppingCart.addEventListener("click", (event)=>{
+
       event.preventDefault();
       
       let optionSelectedByForm = document.querySelector("#product-option").value;
@@ -128,17 +129,19 @@ function searchProduct (url) {
 
 function insertSelectedProduct (product_selected_by_id) {
 
-  let structureCard = `
-    <img src="${product_selected_by_id.imageUrl}" class="d-block w-100" alt="${product_selected_by_id.name}" />
-    <div class="card-body">
-      <h5 class="card-title">Product Name : <span>${product_selected_by_id.name}</span></h5>
-      <p class="card-text">Price : <span>${product_selected_by_id.price}</span></p>
-      <p class="card-text">Description : <span>${product_selected_by_id.description}</span></p>
-      <form>
-        <label for="product-option">Choose a option:</label>
-            <select class="form-select" name="product-option" id="product-option" aria-label="Furniture options selected">
-              <option selected>Open this select menu</option>
+  let productImage = `
+    <img src="${product_selected_by_id.imageUrl}" class="d-block w-100 shadow product" alt="${product_selected_by_id.name}" />    
     `;
+
+  let productDescription = `    
+    <div class="card-body product product__description py-0">
+      <h1 class="card-title"><span>${product_selected_by_id.name}</span></h1>
+      <h3 class="card-text"><span>${product_selected_by_id.price/100} €</span></h3>
+      <p class="card-text"><span>${product_selected_by_id.description}</span></p>
+      <form class="py-3 d-flex">
+        <label for="product-option" class="pe-2 align-self-center">Choose a lense:</label>
+        <select class="form-select w-25" name="product-option" id="product-option" aria-label="Furniture options selected">
+  `;
 
   let options = [];
 
@@ -154,17 +157,20 @@ function insertSelectedProduct (product_selected_by_id) {
 
   options.forEach(function(option) {
 
-    structureCard += `
-    <option value="${option}">${option}</option>        
+    productDescription += `
+      <option value="${option}">${option}</option>        
     `;
   });
 
-  structureCard += `
+  productDescription += `
     </select>
     </form>
-    <button id="validationButton" class="btn btn-primary" type="submit" name="validationButton">Ajouter l'article au panier</button>
+    <button id="validationButton" class="main-btn product-btn" type="submit" name="validationButton">Add to cart</button>
     </div>
-    `;
+  `;
 
-  document.querySelector(".card").innerHTML = structureCard; 
+  document.querySelector(".productImage").innerHTML = productImage;
+
+  document.querySelector(".productDescription").innerHTML = productDescription;
+
 }

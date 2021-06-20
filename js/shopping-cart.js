@@ -5,202 +5,329 @@ var url_furniture = 'http://localhost:3000/api/furniture';
 var url_array = [url_teddies, url_cameras, url_furniture];
 
 var priceProducts = [];
+var tbody = document.createElement('tbody');
+var cartItemsWrapper = document.getElementById('cartItems');
 
-if (localStorage.getItem("cameras") != undefined) {
-    var camerasInLocalStorage = JSON.parse(localStorage.getItem("cameras"));
-}
+var productsInLocalStorage = JSON.parse(localStorage.getItem("cameras"));
 
-console.log("key cameras json");
-console.log(localStorage.getItem("cameras"));
-
-console.log(camerasInLocalStorage);
-var productsInLocalStorage = camerasInLocalStorage;
+// if (localStorage.getItem("cameras") != undefined) {
+//     var productsInLocalStorage = JSON.parse(localStorage.getItem("cameras"));
+// }
 
 // url_array.forEach(element => insert_products_in_shopping_cart(element));
 
 insert_products_in_shopping_cart(url_array[1]);
 
+// This function displays products from the selection in the localstorage
 function insert_products_in_shopping_cart (url) {             
-        
+    
+    emptyCart(cartItemsWrapper);
+
     fetch(url)
     .then((resp) => resp.json())
     .then(function(data) {     
         
-        if (productsInLocalStorage != undefined) {
-
-            for (let i = 0 ; i < productsInLocalStorage.length ; i++) {
-                
-                productFoundInApiById = data.find((product) => product._id === productsInLocalStorage[i].selectedProductId);
-                            
-                if (productFoundInApiById != undefined) {
-
-                    let shoppingCartCard = `
-                    <img src="${productFoundInApiById.imageUrl}" class="d-block w-100" alt="${productFoundInApiById.name}" />
-                    <div class="card-body">
-                        <p class="card-text">Name : <span>${productFoundInApiById.name}</span></p>
-                        <p class="card-text">Option : <span>${productsInLocalStorage[i].selectedProductOption}</span></p>
-                        <p class="card-text">Quantité : <span>${productsInLocalStorage[i].selectedProductQuantity}</span></p>
-                        <p class="card-text">Description : <span>${productFoundInApiById.description}</span></p>
-                        <p class="card-text">Price : <span>${productFoundInApiById.price}</span></p>
-                    </div>
-                `;
-                    
-                    document.querySelector(".card").innerHTML += shoppingCartCard;
-                    priceProducts.push(productFoundInApiById.price);
-                    console.log(priceProducts);
-                    console.log(priceProducts.length);                
-                }
-
-                if (i == (productsInLocalStorage.length-1)) {
-
-                    console.log(priceProducts.length);
-                    var sum = 0;    
-                    for (let i = 0 ; i < priceProducts.length ; i++) {
-                        sum += priceProducts[i];    
-                    }  
-                    
-                    console.log("sum");
-                    console.log(sum);
-                        
-                    // localStorage.setItem("orderTotalPrice", JSON.stringify(sum));
-                    localStorage.setItem("orderTotalPrice", sum);
-
-                    let totalPriceShoppingCart = `        
-                        <div class="card-body">            
-                            <p class="card-text">Prix total du panier : <span>${sum}</span></p>
-                        </div>
-                        `;
-                                    
-                    document.querySelector(".card").insertAdjacentHTML("beforeend", totalPriceShoppingCart);
-
-                }
-                                
-            }       
+        return new Promise((resolve, reject) => {
             
-        }
+            if (productsInLocalStorage != undefined) {
+
+                let thead = document.createElement('thead');
+
+                thead.innerHTML = `
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Lense</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Remove</th>
+                    </tr>
+                </thead>
+                `;
+
+                tbody.innerHTML = `
+                    <tbody>
+                    </tbody>
+                `;
+
+                for (let i = 0 ; i < productsInLocalStorage.length ; i++) {
+                    
+                    // Search selected product in api url from id in localstorage
+
+                    productFoundInApiById = data.find((product) => product._id === productsInLocalStorage[i].
+                    
+                    selectedProductId);
+
+                    let cartItemsWrapper = document.getElementById('cartItems');
+                    
+                    // If Id is found in the API url, creates table with products in localstorage
+                    if (productFoundInApiById != undefined) {
+                        
+                        // declaration of table tags                    
+                        
+                        let tr = document.createElement('tr');
+
+                        let rowItemName = document.createElement('td');
+                        let lenseCell = document.createElement('td');
+                        let priceCell = document.createElement('td');
+                        let quantity = document.createElement('td');
+                        let totalPriceCell = document.createElement('td');
+                        let btnRemove = document.createElement('td');
+
+                        let imgCell = document.createElement('img');
+                        let nameCell = document.createElement('p');
+
+                        // display each table tags with values in localstorage                        
+
+                        nameCell.innerHTML = productFoundInApiById.name;
+                        lenseCell.innerHTML = productsInLocalStorage[i].selectedProductOption;
+                        priceCell.innerHTML = (productFoundInApiById.price/100) + ' €';
+                        totalPriceCell.innerHTML = (productFoundInApiById.price/100 * productsInLocalStorage[i].selectedProductQuantity) + ' €';
+                        imgCell.setAttribute('src', productFoundInApiById.imageUrl);
+
+                        btnRemove.innerHTML = `<button class="btn-del" id='remove' onclick='removeItem(${i})'>X</button>`;
+                        quantity.innerHTML = `<input type="number" id="quantity" name="quantity" min="1" max="10" value ="${productsInLocalStorage[i].selectedProductQuantity}" class="quantity" onclick="changeQuantity(${i}, event.target.value)">`;
+
+                        rowItemName.append(imgCell, nameCell);
+                        rowItemName.classList.add('rowImage');
+
+                        cartItemsWrapper.append(thead,tbody);
+                        tr.append(rowItemName, lenseCell, priceCell, quantity, totalPriceCell, btnRemove);
+                        tbody.appendChild(tr);
+                    
+                        priceProducts.push(productFoundInApiById.price); 
+                    }
     
+                    if (i == (productsInLocalStorage.length-1)) {
+                            
+                        resolve("resolved");
+    
+                    }
+                                    
+                }       
+                
+            }
+
+        });  
+            
     })
+    .then((value) => {
+        
+        if (value !== undefined) {
+            insertTotalPriceShoppingCart()
+        }
+        })
     .catch(function(error) {
     console.log(error);
     });    
       
 }
 
-var btnOrderConfirmation = document.getElementById("btnOrderConfirmation");
+// change product quantity 
+function changeQuantity(index, value) {
 
-btnOrderConfirmation.addEventListener("click", (e) => {
+    productsInLocalStorage[index].selectedProductQuantity = parseInt(value);
+    localStorage.setItem('cameras', JSON.stringify(productsInLocalStorage));
+
+    // Re-render....
+    insert_products_in_shopping_cart(url_array[1]);    
     
-    e.preventDefault();
+}
 
-    // var sum = localStorage.getItem("orderTotalPrice");
+// Remove item from cart and update localStorage data
+function removeItem(index) {
+    
+    productsInLocalStorage.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(productsInLocalStorage));
 
-    var contact = {    
-        firstName: document.getElementById("inputFirstName").value,
-        lastName: document.getElementById("inputLastName").value,
-        address: document.getElementById("inputAddress").value,
-        city: document.getElementById("inputCity").value,
-        email: document.getElementById("inputEmail").value
-    }
+    // Re-render....
+    insert_products_in_shopping_cart(url_array[1]);
+  }
 
-    localStorage.setItem("contact", JSON.stringify(contact));
+// This function calculates the total price of the shopping cart from the array priceProducts generated by insert_products_in_shopping_cart function and then display this total price in the shopping cart
+function insertTotalPriceShoppingCart() {
 
-    var products = [];
+    // console.log(priceProducts.length);    
 
-    teddiesInLocalStorage.forEach(element => products.push(element.selectedProductId));
-    console.log(products);
+    var sum = 0;
 
-    var databackEnd = {
-        contact : contact,
-        products : products, 
-    }
-
-    console.log(databackEnd);
-       
-    fetch('http://localhost:3000/api/teddies/order', {
-    method: 'POST',
-    body: JSON.stringify(databackEnd),
-    headers : {"Content-type" : "application/json"},    
-    })    
-    .then(response => response.json())
-    .then(function(data) {                
-        
-        window.location.href = `order-confirmation.html?orderId=${data.orderId}&orderTotalPrice=${sum/100}`;
-                       
-    })
-    .then(localStorage.removeItem("teddies"))
-    .then(localStorage.removeItem("orderTotalPrice"))
-    .catch((error) => {
-      alert(error)
-    });       
-
-    // document.getElementById("formOrderConfirmation").submit();
+    for (let i = 0 ; i < priceProducts.length ; i++) {
+        sum += priceProducts[i];    
+    }  
             
-});
+    // localStorage.setItem("orderTotalPrice", JSON.stringify(sum));
+    localStorage.setItem("orderTotalPrice", sum/100);
 
-// Input Form validity of contact properties
+    let tr = document.createElement('tr');
+    let totalShoppingCartName = document.createElement('td');
+    totalShoppingCartName.setAttribute("colspan", 4);
+    totalShoppingCartName.classList.add("text-center");
 
-validateInputForm(document.getElementById("inputFirstName"), (event) => event.target.value.length > 0);
-validateInputForm(document.getElementById("inputLastName"), (event) => event.target.value.length > 0);
-validateInputForm(document.getElementById("inputZipCode"), (event) => {
+    let totalShoppingCartPrice = document.createElement('td');
+    totalShoppingCartPrice.setAttribute("colspan", 2);
 
-    const zipcodeRegex = /^[0-9]{5}$/
-    return zipcodeRegex.test(event.target.value)
 
-});
-validateInputForm(document.getElementById("inputEmail"), (event) => {
+    totalShoppingCartName.innerHTML = 'Total';
+    totalShoppingCartPrice.innerHTML = sum/100 + ' €';
 
-    const emailRegex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/
-    return emailRegex.test(event.target.value)    
+    tr.append(totalShoppingCartName, totalShoppingCartPrice);
+    tr.style.fontWeight = "bold";   
+    tbody.appendChild(tr);
 
-});
+}
 
-const emailtest = ".dubois@gmail.com";
-const resultat = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/.test(emailtest);
-console.log(resultat);
+function emptyCart(cartItemsWrapper) {
+    // Empty current cart table items
+    console.log("cartItemsWrapper");
+    console.log(cartItemsWrapper);
 
-validateInputForm(document.getElementById("inputCity"), (event) => event.target.value.length > 0);
+    cartItemsWrapper.innerHTML = '';    
 
-// Function which validate input forms
+    // Show empty cart page if no products exist
+    let container = document.getElementById('container');
+    // let cartArray = [];
+    
+    console.log(productsInLocalStorage);
+    if (productsInLocalStorage === null) 
+    // {
+    //   cartArray = [];
+    // } else {
+    //   cartArray = JSON.parse(productsInLocalStorage);
+    // }
+  
+    // if (cartArray.length === 0 || productsInLocalStorage === null) 
+    {
+      container.innerHTML = `<div class="emptyCart">
+        <div class="emptyCart-img">
+        <img src="images/emptyCart.png" alt="empty cart">
+        </div>
+        <div>
+            <h1>Hey, it feels so light!</h1>
+            <p>There is nothing in your Cart. let's add some items.</p>
+            <button><a href="index.html">Start Shopping</a></button>
+        </div>
+        </div>`
+    }
+}
 
-function validateInputForm (element, conditionWithFunctionOnEvent) {
+if (productsInLocalStorage != undefined ) {
+    var btnOrderConfirmation = document.getElementById("btnOrderConfirmation");
 
-    // Focus on input : if the condition is applied, the input is validated
+    btnOrderConfirmation.addEventListener("click", (e) => {
+    
+        e.preventDefault();
+    
+        // var sum = localStorage.getItem("orderTotalPrice");
+    
+        var contact = {    
+            firstName: document.getElementById("inputFirstName").value,
+            lastName: document.getElementById("inputLastName").value,
+            address: document.getElementById("inputAddress").value,
+            city: document.getElementById("inputCity").value,
+            email: document.getElementById("inputEmail").value
+        }
+    
+        localStorage.setItem("contact", JSON.stringify(contact));
+    
+        var products = [];
+    
+        teddiesInLocalStorage.forEach(element => products.push(element.selectedProductId));
+        console.log(products);
+    
+        var databackEnd = {
+            contact : contact,
+            products : products, 
+        }
+    
+        console.log(databackEnd);
+           
+        fetch('http://localhost:3000/api/teddies/order', {
+        method: 'POST',
+        body: JSON.stringify(databackEnd),
+        headers : {"Content-type" : "application/json"},    
+        })    
+        .then(response => response.json())
+        .then(function(data) {                
+            
+            window.location.href = `order-confirmation.html?orderId=${data.orderId}&orderTotalPrice=${sum/100}`;
+                           
+        })
+        .then(localStorage.removeItem("teddies"))
+        .then(localStorage.removeItem("orderTotalPrice"))
+        .catch((error) => {
+          alert(error)
+        });       
+    
+        // document.getElementById("formOrderConfirmation").submit();
+                
+    });
 
-    element.oninput = (event) => {
+    // Input Form validity of contact properties
 
-        if (conditionWithFunctionOnEvent(event)) {
+    validateInputForm(document.getElementById("inputFirstName"), (event) => event.target.value.length > 0);
+    validateInputForm(document.getElementById("inputLastName"), (event) => event.target.value.length > 0);
+    validateInputForm(document.getElementById("inputZipCode"), (event) => {
 
-            inputFormValidated(event.target)
+        const zipcodeRegex = /^[0-9]{5}$/
+        return zipcodeRegex.test(event.target.value)
+
+    });
+    validateInputForm(document.getElementById("inputEmail"), (event) => {
+
+        const emailRegex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/
+        return emailRegex.test(event.target.value)    
+
+    });
+
+    const emailtest = ".dubois@gmail.com";
+    const resultat = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/.test(emailtest);
+
+    validateInputForm(document.getElementById("inputCity"), (event) => event.target.value.length > 0);
+
+    // Function which validate input forms
+
+    function validateInputForm (element, conditionWithFunctionOnEvent) {
+
+        // Focus on input : if the condition is applied, the input is validated
+
+        element.oninput = (event) => {
+
+            if (conditionWithFunctionOnEvent(event)) {
+
+                inputFormValidated(event.target)
+
+            }
 
         }
 
+        // Input out of focus: if the condition is not applied, the input is unvalidated
+
+        element.onblur = (event) => {
+
+            if (!conditionWithFunctionOnEvent(event)) {
+
+                inputFormUnvalidated(event.target)
+
+            }
+
+        }   
+        
     }
 
-    // Input out of focus: if the condition is not applied, the input is unvalidated
+    // Style for validated input form
 
-    element.onblur = (event) => {
+    function inputFormValidated (element) {
 
-        if (!conditionWithFunctionOnEvent(event)) {
+        element.style.border = 'solid 2px green'
+    }
 
-            inputFormUnvalidated(event.target)
+    // Style for unvalidated input form
 
-        }
+    function inputFormUnvalidated (element) {
 
-    }   
-    
-}
+        element.style.border = 'solid 2px red'
 
-// Style for validated input form
-
-function inputFormValidated (element) {
-
-    element.style.border = 'solid 2px green'
-}
-
-// Style for unvalidated input form
-
-function inputFormUnvalidated (element) {
-
-    element.style.border = 'solid 2px red'
+    }
 
 }

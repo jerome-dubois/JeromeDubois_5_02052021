@@ -1,0 +1,24 @@
+.rowImage {
+    img {
+        width: 70px;
+        margin-right: 10px;
+    }
+    p {
+        display: inline;
+    }
+}
+
+table {
+    // border-collapse: collapse;
+    width: 85%;
+    margin: 35px auto;
+    max-width: 800px;    
+    box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
+    td {
+        vertical-align : middle;
+    }
+}
+
+.quantity {
+    width: 50px;
+}

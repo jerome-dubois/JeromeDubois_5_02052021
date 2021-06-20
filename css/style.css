@@ -13,8 +13,6 @@
 }
 
 .carousel-parent {
-  position: relative;
-  transform-style: preserve-3d;
   min-height: 20vh;
 }
 
@@ -77,6 +75,15 @@ a:hover {
   transition: opacity 250ms;
 }
 
+.product-btn {
+  font-size: 1rem;
+}
+@media (min-width: 992px) {
+  .product-btn {
+    width: 50%;
+  }
+}
+
 .container {
   background-color: #F2F2F2;
 }
@@ -101,6 +108,10 @@ nav ul li {
 
 .cartIcon {
   width: 50px;
+}
+
+.cartWrapper {
+  position: relative;
 }
 
 footer {
@@ -234,6 +245,39 @@ footer li a:link {
   .product-card {
     width: 100%;
   }
+}
+
+.product {
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+.product__description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.rowImage img {
+  width: 70px;
+  margin-right: 10px;
+}
+.rowImage p {
+  display: inline;
+}
+
+table {
+  width: 85%;
+  margin: 35px auto;
+  max-width: 800px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+table td {
+  vertical-align: middle;
+}
+
+.quantity {
+  width: 50px;
 }
 
 /*# sourceMappingURL=style.css.map */
