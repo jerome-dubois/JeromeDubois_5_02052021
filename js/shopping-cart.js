@@ -139,7 +139,7 @@ function changeQuantity(index, value) {
 function removeItem(index) {
     
     productsInLocalStorage.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(productsInLocalStorage));
+    localStorage.setItem('cameras', JSON.stringify(productsInLocalStorage));
 
     // Re-render....
     insert_products_in_shopping_cart(url_array[1]);
