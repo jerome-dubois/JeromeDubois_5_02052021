@@ -18,7 +18,7 @@ var productsInLocalStorage = JSON.parse(localStorage.getItem("cameras"));
 
 insert_products_in_shopping_cart(url_array[1]);
 
-// This function displays products from the selection in the localstorage
+// This function displays products from the selection in the localstorage abd with a research of complementary informations about selected products in url API
 function insert_products_in_shopping_cart (url) {             
     
     emptyCart(cartItemsWrapper);
@@ -50,6 +50,8 @@ function insert_products_in_shopping_cart (url) {
                     <tbody>
                     </tbody>
                 `;
+                
+                priceProducts = [];
 
                 for (let i = 0 ; i < productsInLocalStorage.length ; i++) {
                     
@@ -83,11 +85,11 @@ function insert_products_in_shopping_cart (url) {
                         nameCell.innerHTML = productFoundInApiById.name;
                         lenseCell.innerHTML = productsInLocalStorage[i].selectedProductOption;
                         priceCell.innerHTML = (productFoundInApiById.price/100) + ' €';
-                        totalPriceCell.innerHTML = (productFoundInApiById.price/100 * productsInLocalStorage[i].selectedProductQuantity) + ' €';
+                        totalPriceCell.innerHTML = ((productFoundInApiById.price/100) * productsInLocalStorage[i].selectedProductQuantity) + ' €';
                         imgCell.setAttribute('src', productFoundInApiById.imageUrl);
 
-                        btnRemove.innerHTML = `<button class="btn-del" id='remove' onclick='removeItem(${i})'>X</button>`;
-                        quantity.innerHTML = `<input type="number" id="quantity" name="quantity" min="1" max="10" value ="${productsInLocalStorage[i].selectedProductQuantity}" class="quantity" onclick="changeQuantity(${i}, event.target.value)">`;
+                        btnRemove.innerHTML = `<button class="btn-del" id='remove' onclick='removeItem(${i})'><img src="./images/outline_remove_shopping_cart_black_18dp.png" alt="remove icon" class="removetIcon"></button>`;
+                        quantity.innerHTML = `<input type="number" id="quantity" name="quantity" min="1" value ="${productsInLocalStorage[i].selectedProductQuantity}" class="quantity" onclick="changeQuantity(${i}, event.target.value)">`;
 
                         rowItemName.append(imgCell, nameCell);
                         rowItemName.classList.add('rowImage');
@@ -95,8 +97,11 @@ function insert_products_in_shopping_cart (url) {
                         cartItemsWrapper.append(thead,tbody);
                         tr.append(rowItemName, lenseCell, priceCell, quantity, totalPriceCell, btnRemove);
                         tbody.appendChild(tr);
-                    
-                        priceProducts.push(productFoundInApiById.price); 
+                                                
+                        priceProducts.push(productFoundInApiById.price/100 * productsInLocalStorage[i].selectedProductQuantity);
+
+                        console.log("priceProducts");
+                        console.log(priceProducts);
                     }
     
                     if (i == (productsInLocalStorage.length-1)) {
@@ -127,6 +132,8 @@ function insert_products_in_shopping_cart (url) {
 // change product quantity 
 function changeQuantity(index, value) {
 
+    // var productsInLocalStorage = JSON.parse(localStorage.getItem("cameras"));
+
     productsInLocalStorage[index].selectedProductQuantity = parseInt(value);
     localStorage.setItem('cameras', JSON.stringify(productsInLocalStorage));
 
@@ -152,12 +159,16 @@ function insertTotalPriceShoppingCart() {
 
     var sum = 0;
 
+    console.log("sum");
+    console.log(sum);
+
     for (let i = 0 ; i < priceProducts.length ; i++) {
         sum += priceProducts[i];    
     }  
             
     // localStorage.setItem("orderTotalPrice", JSON.stringify(sum));
-    localStorage.setItem("orderTotalPrice", sum/100);
+    localStorage.setItem("orderTotalPrice", sum);
+
 
     let tr = document.createElement('tr');
     let totalShoppingCartName = document.createElement('td');
@@ -169,7 +180,7 @@ function insertTotalPriceShoppingCart() {
 
 
     totalShoppingCartName.innerHTML = 'Total';
-    totalShoppingCartPrice.innerHTML = sum/100 + ' €';
+    totalShoppingCartPrice.innerHTML = sum + ' €';
 
     tr.append(totalShoppingCartName, totalShoppingCartPrice);
     tr.style.fontWeight = "bold";   
@@ -185,29 +196,19 @@ function emptyCart(cartItemsWrapper) {
     cartItemsWrapper.innerHTML = '';    
 
     // Show empty cart page if no products exist
-    let container = document.getElementById('container');
-    // let cartArray = [];
+    let container = document.getElementById('container');    
     
     console.log(productsInLocalStorage);
-    if (productsInLocalStorage === null) 
-    // {
-    //   cartArray = [];
-    // } else {
-    //   cartArray = JSON.parse(productsInLocalStorage);
-    // }
-  
-    // if (cartArray.length === 0 || productsInLocalStorage === null) 
+    if (productsInLocalStorage === null || productsInLocalStorage.length === 0)     
     {
-      container.innerHTML = `<div class="emptyCart">
-        <div class="emptyCart-img">
-        <img src="images/emptyCart.png" alt="empty cart">
+      container.innerHTML = `        
+        <div class="container py-5 px-5 d-flex flex-column align-items-center emptyCartContainer">
+            <img src="./images/remove_shopping_cart_white_48dp_degrade.svg" alt="cart icon" class="emptycartIcon">
+            <h1 class="font-weight-bold text-center">Your shopping cart is empty!</h1>
+            <p class="font-weight-bold text-center">Click below to start shopping !</p>            
+            <button class="main-btn" type="submit"><a href="index.html">Start Shopping</a></button>
         </div>
-        <div>
-            <h1>Hey, it feels so light!</h1>
-            <p>There is nothing in your Cart. let's add some items.</p>
-            <button><a href="index.html">Start Shopping</a></button>
-        </div>
-        </div>`
+        `
     }
 }
 
@@ -218,48 +219,67 @@ if (productsInLocalStorage != undefined ) {
     
         e.preventDefault();
     
-        // var sum = localStorage.getItem("orderTotalPrice");
+        var sum = localStorage.getItem("orderTotalPrice");
     
-        var contact = {    
+        var contact = {
+
             firstName: document.getElementById("inputFirstName").value,
             lastName: document.getElementById("inputLastName").value,
             address: document.getElementById("inputAddress").value,
             city: document.getElementById("inputCity").value,
             email: document.getElementById("inputEmail").value
         }
-    
-        localStorage.setItem("contact", JSON.stringify(contact));
-    
-        var products = [];
-    
-        teddiesInLocalStorage.forEach(element => products.push(element.selectedProductId));
-        console.log(products);
-    
-        var databackEnd = {
-            contact : contact,
-            products : products, 
-        }
-    
-        console.log(databackEnd);
-           
-        fetch('http://localhost:3000/api/teddies/order', {
-        method: 'POST',
-        body: JSON.stringify(databackEnd),
-        headers : {"Content-type" : "application/json"},    
-        })    
-        .then(response => response.json())
-        .then(function(data) {                
-            
-            window.location.href = `order-confirmation.html?orderId=${data.orderId}&orderTotalPrice=${sum/100}`;
-                           
-        })
-        .then(localStorage.removeItem("teddies"))
-        .then(localStorage.removeItem("orderTotalPrice"))
-        .catch((error) => {
-          alert(error)
-        });       
-    
-        // document.getElementById("formOrderConfirmation").submit();
+
+        var emailRegex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/
+
+        if (!(
+            contact.firstName.length > 1
+            && contact.lastName.length > 1
+            && emailRegex.test(contact.email)
+            && contact.city.length > 1
+            )) {
+                        
+            alert("Please fill in the correct fields before proceeding to payment")
+
+        } else if (
+            contact.firstName.length > 1
+            && contact.lastName.length > 1
+            && emailRegex.test(contact.email)
+            && contact.city.length > 1
+            ) {
+
+            localStorage.setItem("contact", JSON.stringify(contact));
+
+            var products = [];
+        
+            productsInLocalStorage.forEach(element => products.push(element.selectedProductId));
+            console.log(products);
+        
+            var databackEnd = {
+                contact : contact,
+                products : products, 
+            }
+        
+            console.log(databackEnd);
+                
+            fetch('http://localhost:3000/api/cameras/order', {
+            method: 'POST',
+            body: JSON.stringify(databackEnd),
+            headers : {"Content-type" : "application/json"},    
+            })    
+            .then(response => response.json())
+            .then(function(data) {                
+                
+                window.location.href = `order-confirmation.html?orderId=${data.orderId}&orderTotalPrice=${sum}`;
+                                
+            })
+            .then(localStorage.removeItem("cameras"))
+            .then(localStorage.removeItem("orderTotalPrice"))
+            .catch((error) => {
+                alert(error)
+            });
+
+        }           
                 
     });
 
@@ -267,6 +287,8 @@ if (productsInLocalStorage != undefined ) {
 
     validateInputForm(document.getElementById("inputFirstName"), (event) => event.target.value.length > 0);
     validateInputForm(document.getElementById("inputLastName"), (event) => event.target.value.length > 0);
+    validateInputForm(document.getElementById("inputCity"), (event) => event.target.value.length > 0);
+
     validateInputForm(document.getElementById("inputZipCode"), (event) => {
 
         const zipcodeRegex = /^[0-9]{5}$/
@@ -275,15 +297,10 @@ if (productsInLocalStorage != undefined ) {
     });
     validateInputForm(document.getElementById("inputEmail"), (event) => {
 
-        const emailRegex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/
+        var emailRegex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/
         return emailRegex.test(event.target.value)    
 
-    });
-
-    const emailtest = ".dubois@gmail.com";
-    const resultat = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/.test(emailtest);
-
-    validateInputForm(document.getElementById("inputCity"), (event) => event.target.value.length > 0);
+    });    
 
     // Function which validate input forms
 
@@ -329,5 +346,16 @@ if (productsInLocalStorage != undefined ) {
         element.style.border = 'solid 2px red'
 
     }
+
+    // if (!(
+    //     contact.firstName.length > 1
+    //     // && lastName.length > 1
+    //     // emailRegex.test(email)
+    //     // && adress.length > 6
+    //     // && city.length > 1
+    //   )) {
+    //     // console.log(emailRegex.test(email));
+    //     alert("Please fill in the correct fields before proceeding to payment")
+    //   }
 
 }

@@ -45,45 +45,12 @@
 
 }
 
-// .operation-btn {
-//     padding:1.5rem 3rem 1.5rem 0.5rem;
-//     margin: 1rem 0 1rem 0.5rem;
-//     border:0;
-//     font-size: 1rem;
-//     background: rgba(0, 0, 0, 0.04);
-//     border-radius: 15px;
-//     cursor: pointer;
-//     margin-bottom: 20px;
-//     box-shadow: -2px 2px 10px #c5c5c5;
-//     position: relative;
-//     min-width: 250px;
-//     &:hover {
-//         background: rgba(147, 86, 220, 0.2);
-//         .operation-btn__icon { color: $color-primary; }            
-//     }
+#btnBackToStore {
 
-//     &:before {
-//         counter-increment: compteListe 1;
-//         content: counter(compteListe) " ";
-//         position: absolute;
-//         left:-0.5rem;
-//         border-radius: 30px;
-//         width: 20px;
-//         height: 20px;
-//         background-color: $color-primary;
-//         color: white;
-//     }
+    font-size: 1rem;
 
-//     &__heading {
-//         padding-left: 1rem;
-//         font-weight: bold;
-//     }
-    
-//     &__icon {
-//         color: rgba(0, 0, 0, .5);        
-//     }  
+    @media (min-width: 992px) {
+        width: 20%;        
+    }    
 
-//     @media (min-width: 1024px) {
-//         width:26%;    
-//     }
-// }
+}

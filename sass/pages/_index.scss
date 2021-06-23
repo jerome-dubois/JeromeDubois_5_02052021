@@ -98,3 +98,42 @@
     // }  
 
 }
+
+.search {
+    position: absolute;
+    top: 20%;
+    left: 50%;    
+    transform: translateX(-50%);
+    // transform: translateY(-50%);
+
+    // max-width: 900px;
+    // position: relative;
+    
+    // z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+    width: 100%;
+
+    margin: 0 auto;
+    padding: 2rem 3rem 3rem;
+    // background-color: #F2F2F2;
+    // h5 {
+    //     margin: 0.5rem 0;
+    // }
+    p {
+        margin: 0.5rem 0 1.5rem;
+        font-size: 1.5rem;
+        color: #fff;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    h1 {
+        color: #fff;
+        font-size: 3rem;
+    }
+
+}

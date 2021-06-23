@@ -140,7 +140,7 @@ function insertSelectedProduct (product_selected_by_id) {
       <p class="card-text"><span>${product_selected_by_id.description}</span></p>
       <form class="py-3 d-flex">
         <label for="product-option" class="pe-2 align-self-center">Choose a lense:</label>
-        <select class="form-select w-25" name="product-option" id="product-option" aria-label="Furniture options selected">
+        <select class="form-select w-50" name="product-option" id="product-option" aria-label="Furniture options selected">
   `;
 
   let options = [];

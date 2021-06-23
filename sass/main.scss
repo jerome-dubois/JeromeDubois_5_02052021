@@ -1,5 +1,4 @@
 @import "./utils/variables";
-// @import "./utils/animation";
 
 @import "./base/base";
 @import "./base/typography";
@@ -10,12 +9,10 @@
 @import "./layouts/header";
 @import "./layouts/footer";
 
-@import "./pages/accueil/search";
-// @import "./pages/accueil/operation";
-@import "./pages/accueil/products";
-// @import "./pages/accueil/city-location";
+@import "./pages/index";
+@import "./pages/order-confirmation";
+@import "./pages/product";
+@import "./pages/shopping-cart";
 
-@import "./pages/product/product";
-// @import "./pages/menu/menu";
 
-@import "./pages/shopping-cart/shopping-cart";
+
