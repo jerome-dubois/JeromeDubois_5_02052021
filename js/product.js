@@ -4,14 +4,22 @@ var url_furniture = 'http://localhost:3000/api/furniture';
 
 var url_array = [url_teddies, url_cameras, url_furniture];
 
+
+// declaration of url_product_id variable equal to url on product.html 
 var url_product_id = new URLSearchParams(window.location.search);
 
+
+// now we returns the value associated with the given search parameter here the product id provided in the call of api url
 var _id = url_product_id.get("id");
 
-// url_array.forEach(element => fetch_search_product(element));
 
+// call of the function searchProduct on the selected url
 searchProduct(url_array[1]);
 
+
+// This function performs 2 main actions:
+// 1 / search for the product selected in the product page from the home page from its Id to be able to display all of its attributes from a request made to the API with fetch
+// 2 / from a selection button to add the product to the cart, create the key corresponding to the type of product then store in the local Storage the attributes differentiating the product, namely its id, its quantity and its option
 function searchProduct (url) {
 
   fetch(url)
@@ -28,6 +36,13 @@ function searchProduct (url) {
     btn_shoppingCart.addEventListener("click", (event)=>{
 
       event.preventDefault();
+
+      let confirme = document.getElementById('confirmation-feedback');
+      confirme.innerHTML = `Added to cart.`;
+      confirme.classList.add('confirmation-feedback--visible');
+      confirme.hideTimeout = setTimeout(() => {
+        confirme.classList.remove('confirmation-feedback--visible');
+      }, 3000);
       
       let optionSelectedByForm = document.querySelector("#product-option").value;
       console.log(optionSelectedByForm);
@@ -40,7 +55,7 @@ function searchProduct (url) {
         selectedProductQuantity : productQuantity,
       };
       
-      // déclaration des objets correspondants aux 3 clés du Local Storage "teddies", "cameras" et "furniture"
+      // declaration of the objects corresponding to the 3 keys of Local Storage "teddies", "cameras" and "furniture"
 
       if (localStorage.getItem("teddies") != undefined) {
         var teddiesInLocalStorage = JSON.parse(localStorage.getItem("teddies"));
@@ -54,7 +69,7 @@ function searchProduct (url) {
         var furnitureInLocalStorage = JSON.parse(localStorage.getItem("furniture"));
       }         
 
-      // lorsque les clés existent, on recherche parmi les valeurs celle correspondant au produit sélectionné
+      // when the keys exist, we search among the values that corresponding to the selected product
 
       if (teddiesInLocalStorage != undefined) {
         var teddyFoundInStorage = teddiesInLocalStorage.find((product) => product.selectedProductId === _id && product.selectedProductOption == optionSelectedByForm);
@@ -68,11 +83,10 @@ function searchProduct (url) {
         var furnitureFoundInStorage = furnitureInLocalStorage.find((product) => product.selectedProductId === _id && product.selectedProductOption == optionSelectedByForm);
       }  
 
-      // ensuite, on teste à chaque passage successif sur les 3 API, lorsque que le 
-      // produit sélectionné dans la page produit est trouvé dans l'API interrogée, 3 cas différents suivants:
-      // 1. si la clé correspondante à l'API testée n'existe pas, on la crée et on y insére le produit,
-      // 2. si la clé existe mais que le produit n'apparaît pas dans les valeurs de cette clé, on y insère simplement le produit,
-      // 3. enfin, si la clé existe et que le produit apparaît dans cette clé, on incrémente sa quantité de 1.
+      // then, on each successive run on the 3 APIs, when the product selected in the product page is found in the API queried, 3 different cases are tested:
+      // 1. if the key corresponding to the tested API does not exist, we create it and insert the product,
+      // 2. if the key exists but the product does not appear in the values of this key, we simply insert the product,
+      // 3. finally, if the key exists and the product appears in this key, its quantity is increased by 1.
 
       switch (url) {
         case url_teddies :
@@ -127,6 +141,8 @@ function searchProduct (url) {
 
 };
 
+
+// This function displays the product selected in index.html in the product page product.html from the identifier of the product in question retrieved in the url of the product.html page present as a parameter
 function insertSelectedProduct (product_selected_by_id) {
 
   let productImage = `
@@ -166,6 +182,7 @@ function insertSelectedProduct (product_selected_by_id) {
     </select>
     </form>
     <button id="validationButton" class="main-btn product-btn" type="submit" name="validationButton">Add to cart</button>
+    <p id="confirmation-feedback" class="confirmation-feedback"></p>
     </div>
   `;
 

@@ -1,14 +1,14 @@
+// declaration of variables corresponding to the url provided by the API
+
 var url_teddies = 'http://localhost:3000/api/teddies';
 var url_cameras = 'http://localhost:3000/api/cameras';
 var url_furniture = 'http://localhost:3000/api/furniture';
 
 var url_array = [url_teddies, url_cameras, url_furniture];
 
-// url_array.forEach(element => fetch_insertCards(element));
-
 insertProducts(url_array[1]);
 
-// products display on index.html with fetch promise on url API
+// this function calls the insertProduct function to retrieve each product in the API url with a fecth request
 function insertProducts(url) {
 
   fetch(url)
@@ -17,7 +17,6 @@ function insertProducts(url) {
        
     data.forEach(element => insertProduct(element._id, element.name, element.price, element.description, element.imageUrl));     
 
-    // return true;
   })
   .then(function() {
 
@@ -34,8 +33,8 @@ function insertProducts(url) {
 
 }
 
+// This function displays a product in the index.html page in the form of a carousel and a card from its attributes defined by the API.
 function insertProduct (_id, name, price, description, imageUrl) {
-
   
   const slideCarousel = `
     <div class="carousel-item carousel-parent">
