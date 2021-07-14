@@ -386,16 +386,4 @@ if (productsInLocalStorage != undefined ) {
         element.style.border = 'solid 2px red'
 
     }
-
-    // if (!(
-    //     contact.firstName.length > 1
-    //     // && lastName.length > 1
-    //     // emailRegex.test(email)
-    //     // && adress.length > 6
-    //     // && city.length > 1
-    //   )) {
-    //     // console.log(emailRegex.test(email));
-    //     alert("Please fill in the correct fields before proceeding to payment")
-    //   }
-
 }

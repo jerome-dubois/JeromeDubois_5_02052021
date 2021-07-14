@@ -18,7 +18,7 @@ searchProduct(url_array[1]);
 
 
 // This function performs 2 main actions:
-// 1 / search for the product selected in the product page from the home page from its Id to be able to display all of its attributes from a request made to the API with fetch
+// 1 / searches for the selected product from the home page using the id contained in the url (use of the URLSearchParams object) to be able to display the product and all of its attributes on the product page using a query fetch on the API
 // 2 / from a selection button to add the product to the cart, create the key corresponding to the type of product then store in the local Storage the attributes differentiating the product, namely its id, its quantity and its option
 function searchProduct (url) {
 
