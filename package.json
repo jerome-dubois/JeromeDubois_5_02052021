@@ -9,6 +9,9 @@
   },
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "14.17.4"
+  },
   "dependencies": {
     "bootstrap-icons": "^1.4.1",
     "express": "^4.16.4",
