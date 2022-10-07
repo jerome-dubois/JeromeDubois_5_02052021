@@ -2,6 +2,8 @@
 
 This is the back end server for Project 5 of the Junior Web Developer path.
 
+Published on : https://jerome-dubois.github.io/JeromeDubois_5_02052021/
+
 ### Prerequisites ###
 
 You will need to have Node and `npm` installed locally on your machine.
