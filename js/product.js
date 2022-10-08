@@ -1,11 +1,11 @@
-let apiUrl =
-  location.hostname === 'localhost' || location.hostname === '127.0.0.1'
-    ? 'http://localhost:3000'
-    : 'https://mvp-site-ecommerce-orinoco.herokuapp.com'
+// let apiUrl =
+//  location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+//    ? 'http://localhost:3000'
+//    : 'https://mvp-site-ecommerce-orinoco.herokuapp.com'
 
-var url_teddies = '${apiUrl}/api/teddies';
+var url_teddies = 'http://localhost:3000/api/teddies';
 var url_cameras = 'https://mvp-site-ecommerce-orinoco.herokuapp.com/api/cameras';
-var url_furniture = '${apiUrl}/api/furniture';
+var url_furniture = 'http://localhost:3000/api/furniture';
 
 var url_array = [url_teddies, url_cameras, url_furniture];
 
