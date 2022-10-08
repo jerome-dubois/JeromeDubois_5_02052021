@@ -4,10 +4,10 @@ let apiUrl =
     : 'https://mvp-site-ecommerce-orinoco.herokuapp.com'
 
 var url_teddies = '${apiUrl}/api/teddies';
-var url_cameras = '${apiUrl}/api/cameras';
+var url_cameras = 'https://mvp-site-ecommerce-orinoco.herokuapp.com/api/cameras';
 var url_furniture = '${apiUrl}/api/furniture';
 
-var url_array = [url_teddies, url_cameras, url_furniture];
+var url_array = [url_teddies, url_camerhttps://mvp-site-ecommerce-orinoco.herokuapp.com/api/camerasas, url_furniture];
 
 
 // declaration of url_product_id variable equal to url on product.html 
