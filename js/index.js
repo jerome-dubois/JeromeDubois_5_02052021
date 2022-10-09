@@ -1,6 +1,7 @@
 // declaration of variables corresponding to the url provided by the API
 
 console.log(location);
+console.log(apiUrl);
 
 //var url_teddies = 'http://localhost:3000/api/teddies';
 //var url_cameras = 'http://localhost:3000/api/cameras';
