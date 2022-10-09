@@ -4,11 +4,6 @@
 //var url_cameras = 'http://localhost:3000/api/cameras';
 //var url_furniture = 'http://localhost:3000/api/furniture';
 
-let apiUrl =
-  location.hostname === 'localhost' || location.hostname === '127.0.0.1'
-    ? 'http://localhost:3000'
-    : 'https://mvp-site-ecommerce-orinoco.herokuapp.com'
-
 var url_teddies = '${apiUrl}/api/teddies';
 var url_cameras = 'https://mvp-site-ecommerce-orinoco.herokuapp.com/api/cameras';
 var url_furniture = '${apiUrl}/api/furniture';
