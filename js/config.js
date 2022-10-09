@@ -3,4 +3,6 @@ let apiUrl =
  ? 'http://localhost:3000'
  : 'https://mvp-site-ecommerce-orinoco.herokuapp.com/'
 
+console.log(location);
+
 //let apiUrl = 'https://mvp-site-ecommerce-orinoco.herokuapp.com/'
