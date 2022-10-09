@@ -1,5 +1,5 @@
 var url_teddies = 'http://localhost:3000/api/teddies';
-var url_cameras = 'http://localhost:3000/api/cameras';
+var url_cameras = 'https://mvp-site-ecommerce-orinoco.herokuapp.com/api/cameras';
 var url_furniture = 'http://localhost:3000/api/furniture';
 
 var url_array = [url_teddies, url_cameras, url_furniture];
